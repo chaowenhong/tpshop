@@ -1,0 +1,82 @@
+{extend name="default/index"}
+{block name="content"}
+ <section id="main-content">
+		    <!-- BEGIN WRAPPER  -->
+            <section class="wrapper site-min-height">
+               <section class="panel">
+                  <header class="panel-heading">
+                     <i class="fa fa-bars" aria-hidden="true"></i>商品列表
+                  </header>
+                  <div class="panel-body">
+                     <div class="adv-table editable-table ">
+                        <table class="table-striped table-hover  table-bordered" style="width:100%">
+                           <thead>
+                            <tr align="left" style="height:50px;">
+                              <td colspan="9">
+                                  <a href="/admin/goods_create" title=""><button id="editable-sample_new" class="btn pull-left btn-sm btn-success">
+                                   <i class="fa fa-plus"></i> 添加商品</button></a>
+                                   <!-- 搜索 -->
+                                  <form class="pull-right" action="/admin/goods_sou" method="get">
+                                          <font class="" style="font-size:17px">名称查询</font>
+                                        <input class=" input-sm" type="text" name="uname" value="" placeholder="输入商品名搜索">
+                                        <font class="" style="font-size:17px">状态查询</font>
+                                        <select class=" btn-sm" name="statu">
+                                         <option  value="0">--选择商品状态--</option>
+                                         <option  value="1">热卖</option>
+                                         <option  value="2">在售</option>
+                                         <option  value="3">缺货</option>
+                                         <option  value="4">下架</option>
+                                       </select>
+                                       <font class="" style="font-size:17px">分类查询</font>
+                                       <select class="btn-sm" name="tid">
+                                         <option value="0">--请选择商品分类--</option>
+                                        {foreach $datas as $v}
+                                          <option value="{$v['id']}">{$v->doname}</option>
+                                        {/foreach}
+                                        </select>
+                                      <button class="btn btn-sm btn-primary"><i class="fa fa-search" aria-hidden="true"></i>搜索查询 
+                                       </button>
+                                 </form>
+                              </td>
+                              </tr>
+                              <tr align="center" style="height:50px;">
+                                 <td>商品名称</td>
+                                 <td>商品样图</td>
+                                 <td>商品价格</td>
+                                 <td>商品数量</td>
+                                 <td>商品分类</td>
+                                 <td>商品简介</td>
+                                 <td>商品状态</td>
+                                 <td>上架时间</td>
+                                 <td>编辑操作</td>
+                              </tr>
+                           </thead>
+                           <tbody>
+                           {foreach $data as $v}
+                                 <td align="center" class="center hidden-phone">{$v->name}</td>
+                                 <td align="center" class="center hidden-phone">{if empty($v->pic)}<img src="/photo/mo/mr1.jpg" style="width:60px;height:60px">{else}<img src="/photo/{$v['pic']}" style="width:60px;height:60px">{/if}
+                                 </td>
+                                 <td align="center" class="center hidden-phone">￥{$v->price}元</td>
+                                 <td align="center" class="center hidden-phone">{$v->num}</td>
+                                 <td align="center" class="center hidden-phone">{$v->type['name']}</td>
+                                 <td align="center" class="center hidden-phone">{$v->content}</td>
+                                 <td align="center" class="center hidden-phone" style="font-size:15px">
+                                  {if $v['status']==1}<font style="color:red"><i class="fa fa-heart fa-spin" ></i>  热卖中！</font>{elseif $v['status']==2}<font style="color:green"><i class="fa fa-certificate fa-spin" ></i>  在售</font>{elseif $v['status']==3}<font style="color:#7d72b9">缺货</font>{elseif $v['status']==4}<font style="color:#bbb4b4">下架</font>{/if}</td>
+                                 <td align="center" class="center hidden-phone">{$v->create_time}</td>
+                                 <td align="center" align="center">
+                                   &nbsp;&nbsp;&nbsp;
+                                   <a class="edit" href="/admin/goods_edit/{$v->id}"><span class="label label-info">修改</span></a>
+                                   <a class="delete" href="/admin/goods_delete/{$v->id}"><span class="label label-danger">删除</span></a>
+                                </td>
+                              </tr>
+                            {/foreach}
+                           </tbody>
+                        </table>
+                        {:$data->render()}
+                     </div>
+                  </div>
+               </section>
+            </section>
+			<!-- END WRAPPER  -->
+         </section>
+{/block}

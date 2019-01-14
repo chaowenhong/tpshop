@@ -1,0 +1,73 @@
+{extend name="default/index"}
+{block name="content"}
+	 <section id="main-content">
+	  
+        <!-- START WRAPPER -->
+        <section class="wrapper">
+          
+          <!-- START ROW -->
+          <div class="row">
+            <div class="col-md-12">
+			<!-- START PANEL -->
+              <section class="panel tasks-widget">
+                <header class="panel-heading">
+                  个人中心
+                </header>
+                <div class="panel-body">
+                  <div class="task-content">
+					<!-- <form action="/admin/user_doupd/{$data->uid}" enctype="multipart/form-data" method="get" accept-charset="utf-8"> -->
+						<input type="hidden" name="ypic" value="{:$data['upic']}">
+						<div class="form-group">
+							<img src="/upic/{$data['upic']}" style="width:50px;height:50px">
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">*用户名称：</label>
+							<input type="text" style="color:#0045ff" class="form-control" name="uname" value="{$data['uname']}" placeholder="username      填写用户名称" disabled="disabled">
+						</div>
+						<div class="form-group">
+							<label for="exampleInputPassword1">*选择性别：</label>
+							<select class="form-control" name="sex" style="color:#0045ff" disabled="disabled">
+								<option {if $data['sex']==0}selected{/if} value="0">--请选择性别--</option>
+								<option {if $data['sex']==1}selected{/if} value="1">男</option>
+								<option {if $data['sex']==2}selected{/if} value="2">女</option>
+								<option {if $data['sex']==3}selected{/if} value="3">保密</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputPassword1">*身份选择：</label>
+							<select class="form-control" name="power" style="color:#0045ff" disabled="disabled">
+							<option {if $data['power']==0}selected{/if} value="0">--请选择您的身份--</option>
+								<option {if $data['power']==1}selected{/if} value="1">普通会员</option>
+								<option {if $data['power']==2}selected{/if} value="2">高级会员</option>
+								<option {if $data['power']==3}selected{/if} value="3">管理员</option>
+								<option {if $data['power']==4}selected{/if} value="4">超级管理员</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputPassword1">联系电话：</label>
+							<input type="text" style="color:#0045ff" class="form-control" name="tel" value="{$data['tel']}"  placeholder="tel     再次填写联系电话(非必填)" disabled="disabled">
+						</div>
+						<div class="form-group">
+							<label for="exampleInputPassword1">电子邮箱：</label>
+							<input type="email" style="color:#0045ff" class="form-control" name="email" value="{$data['email']}"  placeholder="email     再次填写电子邮箱(非必填)" disabled="disabled">
+						</div>
+						</div>
+						<div class="add-task-row">
+							<a href="/admin/user_update/{$data['uid']}" title=""><button class="btn btn-warning btn-md pull-left">
+								修改信息
+							</button></a>
+							
+						</div>
+                </div>
+              </section>
+            <!-- END PANEL -->
+			</div>
+          </div>
+          <!-- END ROW -->
+		  
+          <!-- START ROW -->
+		 
+           <!-- END ROW -->
+		</section>
+      </section>
+{/block}

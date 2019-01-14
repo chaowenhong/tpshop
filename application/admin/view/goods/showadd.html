@@ -1,0 +1,81 @@
+{extend name="default/index"}
+{block name="content"}
+	 <section id="main-content">
+	  
+        <!-- START WRAPPER -->
+        <section class="wrapper">
+          
+          <!-- START ROW -->
+          <div class="row">
+            <div class="col-md-12">
+
+			<!-- START PANEL -->
+              <section class="panel tasks-widget">
+             	<header class="panel-heading">
+                    <i class="fa  fa-chain" aria-hidden="true"></i>添加商品(*为必填项)
+               </header>
+        		<div class="panel-body">
+                  <div class="task-content">
+				<form action="/admin/goods_save" method="post" enctype="multipart/form-data" accept-charset="utf-8">
+						<div class="form-group">
+							<label for="exampleInputEmail1">*商品名字</label>
+							<input type="text" title="填写商品名字" class="form-control" name="name" placeholder="填写商品名字">
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">*商品单价</label>
+							<input type="number" title="填写商品单价" class="form-control" name="price" placeholder="填写商品单价">
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">*商品数量</label>
+							<input type="number" title="填写商品数量" class="form-control" name="num" placeholder="填写商品数量">
+						</div>
+							<div class="form-group">
+							<label for="exampleInputPassword1">*商品类别</label>
+							<select class="form-control" name="tid">
+							{foreach $datas as $v}
+								<option value="{$v['id']}">{$v->doname}</option>
+							{/foreach}
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputPassword1">*商品状态</label>
+							<select class="form-control" name="status">
+								<option value="1">热卖</option>
+								<option value="2">在售</option>
+								<option value="3">缺货</option>
+								<option value="4">下架</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">商品样图</label>
+							<input type="file" title="上传样图" class="form-control" name="pic" placeholder='请上传图片'>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">商品简介</label>
+							<textarea name="content" style="width:100%;height:80px" value="保质保量,美轮美奂">保质保量,美轮美奂</textarea>
+						</div>
+						</div>
+						<div class="add-task-row">
+							<button class="btn btn-success btn-md pull-left">
+								<i class="fa fa-plus"></i>确认添加
+							</button>
+						</div>
+						&nbsp;&nbsp;
+				</form>
+				 <a href="/admin/goods_show" title="">
+                              <button id="editable-sample_new" class="btn btn-md btn-info">
+                              <i class="fa fa-eye"></i>浏览商品
+                           </button></a>
+                </div>
+              </section>
+            <!-- END PANEL -->
+			</div>
+          </div>
+          <!-- END ROW -->
+		  
+          <!-- START ROW -->
+		 
+           <!-- END ROW -->
+		</section>
+      </section>
+{/block}

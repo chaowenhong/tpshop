@@ -1,0 +1,40 @@
+添加用户表单
+ID     用户名   密码    性别   权限     电话   电子邮箱
+uid   uname   pwd   sex     power   tel     email
+
+CREATE TABLE `tpshop`.`Untitled`  (
+  `uid` int(0) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `uname` varchar(60) NOT NULL,
+  `pwd` char(32) NOT NULL,
+  `power` tinyint(1) NOT NULL DEFAULT 1,
+  `tel` tinyint(11) NULL,
+  `email` varchar(255) NULL,
+  `sex` tinyint(1) NOT NULL DEFAULT 3,
+  PRIMARY KEY (`uid`),
+  UNIQUE INDEX(`uname`)
+);
+
+分类列表
+id	名字	父类id	排序id
+id	name	pid	ord
+
+商品数据表
+id   商品名字   商品样图   商品价格   商品数量   商品类型   商品简介   商品状态   添加时间         更新时间
+id   name        pic           price         num         tid            content     status      create_time    update_time
+商品状态 0在售	1热卖	2新货	3缺货	4下架
+CREATE TABLE `tpshop`.`Untitled`  (
+  `id` int(0) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `pic` decimal(8, 2)  NULL,
+  `num` int(0) NULL,
+  `tid` int(0) NULL,
+  `content` text NULL,
+  `status` tinyint(1) UNSIGNED NULL DEFAULT 0,
+  `create_time` datetime(0) NOT NULL,
+  `update_time` datetime(0) NOT NULL,
+  PRIMARY KEY (`id`)
+);
+
+商品订单页面
+用户名	订单号	商品名	            商品数量        订单金额    下单时间      处理订单时间  订单状态    收货地址
+name	number	goodsname         goodssum      ordnum   createtime   updatetime   state     address

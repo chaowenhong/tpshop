@@ -1,0 +1,51 @@
+{extend name="default/index"}
+{block name="content"}
+	 <section id="main-content">
+	  
+        <!-- START WRAPPER -->
+        <section class="wrapper">
+          
+          <!-- START ROW -->
+          <div class="row">
+            <div class="col-md-12">
+			<!-- START PANEL -->
+              <section class="panel tasks-widget">
+             	<header class="panel-heading">
+                    <i class="fa fa-plus" aria-hidden="true"></i> 修改分类
+                </header>
+                <div class="panel-body">
+                  <div class="task-content">
+					<form action="/admin/type_update/{$xg['id']}" method="post"  accept-charset="utf-8">
+						<div class="form-group">
+							<label for="exampleInputPassword1">*选择父级分类：</label>
+							<select class="form-control" name="pid">
+								<option value="0">--顶级分类--</option>
+								{foreach $dat as $v}
+								<option {if $xg['pid']==$v['id']}selected{/if} value="{$v['id']}">{$v->doname}</option>
+								{/foreach}
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">新分类名：</label>
+							<input type="text" title="填写新分类名字" class="form-control" name="name" placeholder="填写新分类名称" value="{$xg['name']}">
+						</div>
+						</div>
+						<div class="add-task-row">
+							<button class="btn btn-success btn-md pull-left">
+								确认修改
+							</button>
+						</div>
+					</form>
+                </div>
+              </section>
+            <!-- END PANEL -->
+			</div>
+          </div>
+          <!-- END ROW -->
+		  
+          <!-- START ROW -->
+		 
+           <!-- END ROW -->
+		</section>
+      </section>
+{/block}

@@ -1,0 +1,70 @@
+{extend name="default/index"}
+{block name="content"}
+ <section id="main-content">
+		    <!-- BEGIN WRAPPER  -->
+            <section class="wrapper site-min-height">
+               <section class="panel">
+                  <header class="panel-heading">
+                     <i class="fa fa-bars" aria-hidden="true"></i> 分类列表
+                    
+                  </header>
+                  <div class="panel-body">
+                     <div class="adv-table editable-table ">
+                        <div class="clearfix">
+                           <div class="btn-group">
+                              <a href="/admin/type_showadd" title="">
+                              <button id="editable-sample_new" class="btn btn-sm btn-success green">
+                              <i class="fa fa-plus"></i> 添加新分类</button></a>
+                           </div>
+                           -
+                            <div class="btn-group">
+                               <form action="/admin/type_show" method="get">
+                                    <input class="input-md" type="text" name="uname" value="" placeholder="输入分类名搜索">
+                                    -
+                                     <button class="btn btn-sm btn-primary">
+                                       <i class="fa fa-search" aria-hidden="true"></i> 搜索查询 
+                                     </button></a>
+                               </form>
+                           </div>
+                        </div>
+
+                        <div class="space15"></div>
+                        <table class="table-striped table-hover table-bordered" style="width:100%">
+                           <thead>
+                           <form action="/admin/type_sort" method="post" id="myform" accept-charset="utf-8">
+                            </form>
+                              <tr align="center" style="height:50px;">
+                                 <td><input type="submit" form="myform" class="btn btn-sm btn-group" value="排序"></td>
+                                 <td>ID</td>
+                                 <td>分类名称</td>
+                                 <td>父级[PID]</td>
+                                 <td >编辑操作</td>
+                              </tr>
+                           </thead>
+                           <tbody>
+                           {foreach $dat as $v}
+                              <tr>
+                                 <td align="center"><input form="myform" style="width:30px" type="text" name="{$v['id']}" value="{$v['ord']}" placeholder=""></td>
+								         <td align="center">{$v->id}</td>
+                                 <td class="center hidden-phone">{if $b==1}{$v->name}{elseif $b==0}{$v->dopid}{/if}</td>
+
+                                 <td align="center" class="center hidden-phone">{$v->pid}</td>
+                                 <td align="center" align="center">
+                                 &nbsp;&nbsp;&nbsp;
+                                 <a class="xiu" href="/admin/type_showadd/{$v->id}"><span class="label label-warning">添加子类</span></a>
+                                 <a class="edit" href="/admin/type_edit/{$v->id}"><span class="label label-info">修改</span></a>
+                                 <a class="delete" href="/admin/type_delete/{$v->id}"><span class="label label-danger">删除</span></a>
+                                 
+                               </td>
+                              </tr>
+                       
+                           {/foreach}
+                           </tbody>
+                        </table>
+                     </div>
+                  </div>
+               </section>
+            </section>
+			<!-- END WRAPPER  -->
+         </section>
+{/block}

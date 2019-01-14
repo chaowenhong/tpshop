@@ -1,0 +1,82 @@
+{extend name="default/index"}
+{block name="content"}
+	 <section id="main-content">
+	  
+        <!-- START WRAPPER -->
+        <section class="wrapper">
+          
+          <!-- START ROW -->
+          <div class="row">
+            <div class="col-md-12">
+			<!-- START PANEL -->
+              <section class="panel tasks-widget">
+             	<header class="panel-heading">
+                    <i class="fa fa-user" aria-hidden="true"></i> 添加用户(*为必填项)
+                </header>
+                <div class="panel-body">
+                  <div class="task-content">
+					<form action="/admin/user_save" enctype="multipart/form-data" method="post" accept-charset="utf-8">
+						<div class="form-group">
+							<label for="exampleInputEmail1">*用户名称：</label>
+							<input type="text" title="名字" class="form-control" name="uname" placeholder="填写用户名称">
+						</div>
+						<div class="form-group">
+							<label for="exampleInputPassword1">*用户密码：</label>
+							<input type="password"  title="密码最好超过8位" class="form-control" name="pwd" placeholder="填写用户密码">
+						</div>
+						<div class="form-group">
+							<label for="exampleInputPassword1">*确认密码：</label>
+							<input type="password" class="form-control" name="repwd"  placeholder="再次填写用户密码">
+						</div>
+						<div class="form-group">
+							<label for="exampleInputPassword1">*选择性别：</label>
+							<select class="form-control" name="sex">
+								<option value="0">--请选择性别--</option>
+								<option value="1">男</option>
+								<option value="2">女</option>
+								<option value="3" selected>保密</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputPassword1">*身份选择：</label>
+							<select class="form-control" name="power">
+								<option value="0">--请选择您的身份--</option>
+								<option value="1" selected>普通会员</option>
+								<option value="2">高级会员</option>
+								<option value="3">管理员</option>
+								<option value="4">超级管理员</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputPassword1">联系电话：</label>
+							<input type="text" class="form-control" name="tel"  placeholder="再次填写联系电话(非必填)">
+						</div>
+						<div class="form-group">
+							<label for="exampleInputPassword1">电子邮箱：</label>
+							<input type="email" class="form-control" name="email"  placeholder="再次填写电子邮箱(非必填)">
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">用户头像：</label>
+							<input type="file" title="上传头像" class="form-control" name="upic" placeholder='请上传头像'>
+						</div>
+						
+						</div>
+						<div class="add-task-row">
+							<button class="btn btn-success btn-md pull-left">
+								确认添加
+							</button>
+						</div>
+				</form>
+                </div>
+              </section>
+            <!-- END PANEL -->
+			</div>
+          </div>
+          <!-- END ROW -->
+		  
+          <!-- START ROW -->
+		 
+           <!-- END ROW -->
+		</section>
+      </section>
+{/block}

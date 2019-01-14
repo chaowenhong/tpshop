@@ -1,0 +1,194 @@
+<!DOCTYPE HTML>
+<html lang="zxx">
+<head>
+  <title>Home</title>
+  <!-- Meta tag Keywords -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="keywords" content=""
+  />
+  <script>
+    addEventListener("load", function () {
+      setTimeout(hideURLbar, 0);
+    }, false);
+
+    function hideURLbar() {
+      window.scrollTo(0, 1);
+    }
+  </script>
+  <!-- Meta tag Keywords -->
+  <!-- css files -->
+  <link rel="stylesheet" href="/admin/login/css/style.css" type="text/css" media="all" />
+  <!-- Style-CSS -->
+  <link rel="stylesheet" href="/admin/login/css/fontawesome-all.css">
+  <!-- Font-Awesome-Icons-CSS -->
+  <!-- //css files -->
+  <!-- web-fonts -->
+  <!-- <link href="http://maxcdn.bootstrapcdn.com/css?family=Josefin+Sans:100,100i,300,300i,400,400i,600,600i,700,700i" rel="stylesheet">
+  <link href="http://maxcdn.bootstrapcdn.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet"> -->
+  <!-- //web-fonts -->
+</head>
+
+<body>
+  <!-- bg effect -->
+  <div id="bg">
+    <canvas></canvas>
+    <canvas></canvas>
+    <canvas></canvas>
+  </div>
+  <!-- //bg effect -->
+  <!-- title -->
+  <!-- <h1>TPSHOP 管理中心</h1> -->
+  <!-- //title -->
+  <!-- content -->
+  <div class="sub-main-w3">
+    <form action="/admin/dologin" method="post">
+      <h2>
+        <i class="fa fa-life-ring fa-spin"></i>
+        TPSHOP后台登录
+        <i class="fa fa-life-ring fa-spin"></i>
+      </h2>
+      <div class="form-style-agile">
+        <label>
+          <i class="fas fa-user"></i>
+          帐号
+          <i class="fa fa-check dc" style="display:none;color:#e4e6be" aria-hidden="true"> 用户名输入正确</i>
+          <i class="fa fa-times dc" style="display:none" aria-hidden="true"> 该用户名不存在</i>
+           <i class="fa fa-exclamation dc" style="display:none;color:#ecacac" aria-hidden="true"> 用户名不能为空</i>
+        </label>
+        <input placeholder="请填写帐号" name="name" id="name" type="text" autocomplete="off">
+    </div>
+      <div class="form-style-agile">
+        <label>
+          <i class="fas fa-unlock-alt"></i>
+          密码
+          <i class="fa fa-check dc" style="display:none;color:#e4e6be" aria-hidden="true"> 密码输入正确</i>
+          <i class="fa fa-times dc" style="display:none" aria-hidden="true"> 密码错误</i>
+           <i class="fa fa-exclamation dc" style="display:none;color:#ecacac" aria-hidden="true"> 密码不能为空</i>
+        </label>
+        <input placeholder="请输入密码" id="pwd" name="pwd" type="password" required="">
+         
+      </div>
+      <div class="form-style-agile">
+        <label>
+          <i class="fa fa-gavel"></i>
+          验证码
+        </label>
+        <input placeholder="请输入验证码" id="yanzhen" name="yanzhen" type="text" autocomplete="off"><br>
+     </div>
+      <!-- checkbox -->
+      <div class="wthree-text">
+        <ul>
+          <li>
+<img src="{:url('/admin/verify')}" alt="captcha" onclick="this.src='/admin/verify?'+Math.random()" />
+          </li>
+          <li>
+            <a href="#">登录遇到问题？</a>
+          </li>
+        </ul>
+      </div>
+      <!-- //checkbox -->
+     <input type="submit"  id="denlua" value="登录">
+    </form>
+  </div>
+  <!-- //content -->
+
+  <!-- copyright -->
+  <div class="footer">
+    <p>Copyright &copy; 2018.Company name All rights reserved.</p>
+  </div>
+  <!-- //copyright -->
+
+  <!-- Jquery -->
+  <script src="/admin/login/js/jquery-3.3.1.min.js"></script>
+  <!-- //Jquery -->
+
+  <!-- effect js -->
+  <script src="/admin/login/js/canva_moving_effect.js"></script>
+  <!-- //effect js -->
+
+</body>
+</html>
+<script type="text/javascript">
+  // 名称查询
+  $("#name").blur(function(){
+      // 设置一个失去焦点的操作
+    $(function(){  
+      $.ajax({        
+        type : 'post',       
+        url : '/admin/sname',        
+        dataType : 'json',       
+        data : {  'name' : $('#name').val() },//这里的data是一个对象       
+        success : function(data){  
+
+         // console.log(data);
+         let ob =  JSON.parse(data); 
+         if(ob.status == 200){
+          // 值是200则为失败，账号错误
+            $(".dc:eq(1)").show();
+            $(".dc:eq(0)").hide();
+            $(".dc:eq(2)").hide();
+            $("#denlua").attr("disabled",true);
+         }
+         if(ob.status == 400){
+          // 为400账号输入正确
+            $(".dc:eq(0)").show();
+            $(".dc:eq(1)").hide();
+            $(".dc:eq(2)").hide();
+            $("#denlua").attr("disabled",false);
+         }
+         if(ob.status == 100){
+          // 100说明没有输入账号
+            $(".dc:eq(0)").hide();
+            $(".dc:eq(1)").hide();
+            $(".dc:eq(2)").show();
+        }
+        }, 
+      });
+    });
+  });
+
+  // 密码查询
+  $("#pwd").blur(function(){
+      // 设置一个失去焦点的操作
+    $(function(){  
+      $.ajax({        
+        type : 'post',       
+        url : '/admin/spwd',        
+        dataType : 'json',       
+        data : {  'pwd' : $('#pwd').val(),'name' : $('#name').val() },//这里的data是一个对象       
+        success : function(data){  
+
+         // console.log(data);
+         let ob =  JSON.parse(data); 
+         if(ob.status == 200){
+          // 值是200则为密码错误
+            $(".dc:eq(4)").show();
+            $(".dc:eq(3)").hide();
+            $(".dc:eq(5)").hide();
+               
+         }
+         if(ob.status == 400){
+          // 为400密码输入正确
+            $(".dc:eq(3)").show();
+            $(".dc:eq(4)").hide();
+            $(".dc:eq(5)").hide();
+         }
+         if(ob.status == 100){
+          // 100说明没有输入密码
+            $(".dc:eq(3)").hide();
+            $(".dc:eq(4)").hide();
+            $(".dc:eq(5)").show();
+        }
+        }, 
+      });
+    });
+  });
+  // 登录按钮
+  $("#denlua").mouseover(function(){
+    $("#denlua").css("background-color","#851313");
+  });
+  $("#denlua").mouseout(function(){
+    $("#denlua").css("background-color","#ec5555");
+  });
+</script>
