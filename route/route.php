@@ -111,16 +111,14 @@ Route::group(['name'=>'/admin/','prefix'=>'admin/OrderController/'],function(){
 Route::group(['name'=>'/admin/','prefix'=>'admin/OtherController/'],function(){
 	// 配置列表
 	Route::rule('config','cindex');
-	// 配置列表
+	// 修改配置
 	Route::rule('save/:id','save');
 	// 关闭网站
 	Route::rule('config_g/:id','config_g');
 	// 开启网站
 	Route::rule('config_k/:id','config_k');
-	// 订单不发货
-	Route::rule('order_bufa/:id','bufahuo');
-	// 删除订单
-	Route::rule('order_delete/:id','delete');
-	// 未发货订单显示
-	Route::rule('order_new','newindex');
+	// 友情链接
+	Route::rule('friend/[:id]','findex');
+	// 添加链接
+	Route::rule('fsave','fsave');
 })->middleware('InfoAdmin');

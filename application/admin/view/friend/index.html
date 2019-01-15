@@ -1,0 +1,109 @@
+{extend name="default/index"}
+{block name="content"}
+   <section id="main-content">
+		    <!-- BEGIN WRAPPER  -->
+            <section class="wrapper site-min-height">
+               <section class="panel">
+                  <header class="panel-heading">
+                     <span class="label label-primary"> <i class="fa fa-users" aria-hidden="true"></i> 网站配置</span>
+                    
+                  </header>
+                  <div class="panel-body">
+                     <div class="adv-table editable-table ">
+                      <div class="space15"></div>
+                        <table class="table-striped table-hover table-bordered" style="width:100%">
+                              <thead>
+                                 <tr align="center" style="height:50px;">
+                                    <td>ID</td>
+                                    <td>网站名称</td>
+                                    <td>网站图片</td>
+                                    <td>网站地址</td>
+                                    <td>显示状态</td>
+                                    <td>操作编辑</td>
+                                 </tr>
+                              </thead>
+                            <tbody>
+                          {foreach $data as $v}
+                            <tr  align="center">
+                              <td>{:$v['id']}</td>
+                              <td>{:$v['name']}</td>
+                              <td><img src="/friend/{:$v->pic}" style="width:35px;height:30px" alt=""></td>
+                              <td>{:$v['address']}</td>
+                              <td>{if $v['statue']==1}<font style="color:green">正常显示</font>{elseif $v['statue']==2}<font style="color:red">停止显示</font>{/if}</td>
+                              <td>
+                              <button class="btn btn-md btn-success baocun{:$v['id']}"  style="color:#fffdfd;display:none" form="" >&nbsp;保存</button>
+                               <a href="/admin/friend/{:$v['id']}"><button class="btn btn-md btn-default xiu{:$v['id']}" style="">修改</button></a>
+                                {if $v['statue']==1}<a href="/admin/config_g/{:$v['id']}" title=""><button class="btn btn-md btn-primary">关闭</button></a>{else}<a href="/admin/config_k/{:$v['id']}" title=""><button class="btn btn-md btn-success">开启</button></a>{/if}
+                              <a href=""><button class="btn btn-md btn-warning" style="color:#fffdfd">删除</button></a>  
+                             </td>
+								           </tr>
+                           <tr align="center" style="display:none;" class="xian{:$v['id']}">
+                                <td>单条修改</td>
+                                 <td><input type="text" name="name" form="" placeholder="请输入友情链接名称"></td>
+                                 <!-- 网站logo -->
+                                 <td><input type="file" name="pic" form=""></td>
+                                 <td><input type="text" name="address" form=""  placeholder="请输入友情链接网站地址"></td>
+                                 <td><select name="statue">
+                                   <option value="1">开启</option>
+                                   <option value="2">关闭</option>
+                                 </select></td>
+                                 <td>👆修改完信息后点击保存</td>
+                             </tr>
+                          {/foreach} 
+                           </tbody>
+                            <tfoot>
+                            <form action="/admin/fsave/{:$v['id']}" id="myform" enctype="multipart/form-data" method="post" accept-charset="utf-8">
+                              </form>
+                              <!-- 隐藏的一行 -->
+                              <tr align="center" style="height:50px;display:none;" class="xian">
+                                <td>id将自动生成</td>
+                                 <td><input type="text" name="name" form="myform" placeholder="请输入友情链接名称"></td>
+                                 <td><input type="file" name="pic" form="myform"></td>
+                                 <td><input type="text" name="address" form="myform"  placeholder="请输入友情链接网站地址"></td>
+                                 <td><select name="statue" form="myform" >
+                                   <option value="1">开启</option>
+                                   <option value="2">关闭</option>
+                                 </select></td>
+                                 <td><button class="btn btn-md btn-success xian "  id="baocun" style="display:none;color:#fffdfd" form="myform" >&nbsp;保存</button></td></tr>
+                              
+                              <tr>
+                                 <td colspan="6" ><button class="btn btn-md btn-primary" id="xiugai" >添加  </button>
+                                 </td>
+                              </tr>
+
+                           </tfoot>
+                        </table>
+                     </div>
+                  </div>
+ 
+               </section>
+            </section>
+			<!-- END WRAPPER  -->
+         </section>
+<script src="/admin/js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(e) {
+      $('#xiugai').mousedown(function(){
+     
+          $('.xian').show();
+          $('#xiugai').hide();
+      });
+       $('#xiugai').mouseup(function(){
+      
+          $('.xian').show();
+           $('#xiugai').hide();
+      });
+       $('.xiu{:$id}').mousedown(function(){
+        $('.baocun{:$id}').show();
+        $('.xian{:$id}').show();
+        $('.xiu{:$id}').hide();
+      });
+       $('.xiu{:$id}').mouseup(function(){
+        $('.baocun{:$id}').show();
+        $('.xian{:$id}').show();
+        
+      });
+   });
+</script>
+{/block}
+

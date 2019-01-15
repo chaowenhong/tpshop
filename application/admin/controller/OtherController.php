@@ -49,9 +49,34 @@ class OtherController extends Controller
      *
      * @return \think\Response
      */
-    public function findex()
+    public function findex($id='')
     {
-        return view('friend/index');
+        // echo 2;die;
+         $data = friend::select();
+        return view('friend/index',['data'=>$data,'id'=>$id]);
+    }
+     /**
+     * 添加友情链接
+     *
+     * @return \think\Response
+     */
+    public function fsave(Request $request)
+    {
+        $data =$request->post();
+        $file =$request->file();
+        dump($data['name']);
+        dump($file);
+      
+        // 检测数据是否填写完整
+        if(empty($data['name'] && $data['address']){
+            return $this->error('数据必须填写完整');
+        }
+        // 检测图片是否上传
+        if(empty($file)){
+            return $this->error('链接必须添加一张图片');
+        }
+        die;  
+        return view('config/index',['data'=>$data]);
     }
     /**
      * 显示创建资源表单页.
