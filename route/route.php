@@ -111,8 +111,12 @@ Route::group(['name'=>'/admin/','prefix'=>'admin/OrderController/'],function(){
 Route::group(['name'=>'/admin/','prefix'=>'admin/OtherController/'],function(){
 	// 配置列表
 	Route::rule('config','cindex');
-	// 订单发货
-	Route::rule('order_fa/:id','fa');
+	// 配置列表
+	Route::rule('save/:id','save');
+	// 关闭网站
+	Route::rule('config_g/:id','config_g');
+	// 开启网站
+	Route::rule('config_k/:id','config_k');
 	// 订单不发货
 	Route::rule('order_bufa/:id','bufahuo');
 	// 删除订单

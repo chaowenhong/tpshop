@@ -17,6 +17,8 @@ class User extends Validate
         'pwd'=>'require|min:6|alphaDash',
         'tel'=>'mobile',
         'email'=>'email',
+        
+
     ];
     
     /**
@@ -33,6 +35,7 @@ class User extends Validate
         'pwd.alphaDash'=>'密码必须是由字母和数字，下划线 _ 及破折号 - 组成',
         'tel.mobile'=>'手机号格式不正确',
         'email.email'=>'邮箱格式不正确，请检查',
+       
 
     ];
 }

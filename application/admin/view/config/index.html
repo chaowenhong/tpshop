@@ -10,8 +10,7 @@
                   </header>
                   <div class="panel-body">
                      <div class="adv-table editable-table ">
-                      
-                        <div class="space15"></div>
+                      <div class="space15"></div>
                         <table class="table-striped table-hover table-bordered" style="width:100%">
                               <thead>
                                  <tr align="center" style="height:50px;">
@@ -19,37 +18,68 @@
                                     <td>网站logo</td>
                                     <td>网站地址</td>
                                     <td>网站标题</td>
+                                    <td>网站状态</td>
+                                    <td>维护页面</td>
                                  </tr>
                               </thead>
                             <tbody>
                               <tr  align="center">
-                                    <td>tpshop</td>
-                                    <td><img src="/photo/mo/mr1.jpg" style="width:100px;height:100px" alt=""></td>
-                                    <td>tpshop.cn</td>
-                                    <td>tpshop商城</td>
+                                    <td>{:$data['name']}</td>
+                                    <td><img src="/configs/{:$data->pic}" style="width:100px;height:50px" alt=""></td>
+                                    <td>{:$data['address']}</td>
+                                    <td>{:$data['title']}</td>
+                                    <td>{if $data['statue']==1}<font style="color:green">正常运行</font>{elseif $data['statue']==2}<font style="color:red">网站维护</font>{/if}</td>
+                                    <td><img src="/configs/weihu/{:$data->wpic}" style="width:100px;height:100px" alt=""></td>
 								     </tr>
                            </tbody>
                            <tfoot>
-                             <tr align="center" style="height:50px;display:none" class="xian">
-                                 <td><input type="text" name="" value="" placeholder="请输入新的网站名称"></td>
-                                 <td><input type="file" name="" value="" ></td>
-                                 <td><input type="text" name="" value="" placeholder="请输入新的网站地址"></td>
-                                 <td><input type="text" name="" value="" placeholder="请输入新的网站标题"></td>
+                            <form action="/admin/save/{:$data['id']}" id="myform" enctype="multipart/form-data" method="post" accept-charset="utf-8">
+                              </form>
+                              <!-- 原来的logo传递 -->
+                              <input type="hidden" name="ypic" form="myform" value="{:$data->pic}">
+                              <!-- 原来的维护图传递 -->
+                              <input type="hidden" name="ywpic" form="myform" value="{:$data->wpic}">
+                              <tr align="center" style="height:50px;display:none;" class="xian">
+                                 <td><input type="text" name="name" value="{:$data->name}" form="myform" placeholder="请输入新的网站名称"></td>
+                                 <!-- 网站logo -->
+                                 <td><input type="file" name="pic" form="myform"></td>
+                                 <td><input type="text" name="address" form="myform" value="{:$data->address}" placeholder="请输入新的网站地址"></td>
+                                 <td><input type="text" name="title" form="myform" value="{:$data->title}" placeholder="请输入新的网站标题"></td>
+                                 <td>{if $data['statue']==1}<a href="/admin/config_g/{:$data['id']}" title=""><button class="btn btn-md btn-primary">关闭</button></a>{else}<a href="/admin/config_k/{:$data['id']}" title=""><button class="btn btn-md btn-success">开启</button></a>{/if}</td>
+                                 <!-- 网页维护图片 -->
+                                 <td><input type="file" name="wpic"  form="myform"></td>
+
                               </tr>
+                              
                               <tr>
-                                 <td colspan="4" ><a href="" title=""><button class="btn btn-md btn-primary" id="xiugai">修改</button></a><a href="" title=""><button class="btn btn-md btn-success xian " style="display:none" id="baocun">保存</button></a></td>
+                                 <td colspan="6" ><button class="btn btn-md btn-primary" id="xiugai" >修改  </button>
+                                 <button class="btn btn-md btn-success xian "  id="baocun" style="display:none;color:#fffdfd" form="myform" >&nbsp;保存</button></td>
                               </tr>
+
                            </tfoot>
                         </table>
                      </div>
                   </div>
+ 
                </section>
             </section>
 			<!-- END WRAPPER  -->
          </section>
-{/block}
-<script>
-   $("#xiugai").onclick(function(){
-    $("#baocun").show();
-  });
+<script src="/admin/js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(e) {
+      $('#xiugai').mousedown(function(){
+        $('#baocun').show();
+          $('.xian').show();
+          $('#xiugai').hide();
+      });
+       $('#xiugai').mouseup(function(){
+        $('#baocun').show();
+          $('.xian').show();
+           $('#xiugai').hide();
+      });
+         
+   });
 </script>
+{/block}
+

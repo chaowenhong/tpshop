@@ -34,7 +34,9 @@ CREATE TABLE `tpshop`.`Untitled`  (
   `update_time` datetime(0) NOT NULL,
   PRIMARY KEY (`id`)
 );
-
+网站配置
+网站名称	网站地址	网站logo	网站标题
+name	address	pic	title
 商品订单页面
 用户名	订单号	商品名	            商品数量        订单金额    下单时间      处理订单时间  订单状态    收货地址
 name	number	goodsname         goodssum      ordnum   createtime   updatetime   state     address
