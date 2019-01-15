@@ -14,6 +14,8 @@ class Config extends Validate
      */	
 	protected $rule = [
         'name'=>'require|max:12',
+        'address'=>'require|max:50',
+        'title'=>'require|max:30',
     ];
     
     /**
@@ -24,6 +26,10 @@ class Config extends Validate
      */	
     protected $message = [
          'name.require'=>'网站名称不能为空',
-        'name.max'=>'名称长度不能超过8个限度',
+        'name.max'=>'名称长度不能超过12个限度',
+        'address.require'=>'网址不能为空',
+        'address.max'=>'网址长度不能超过50个限度',
+         'title.require'=>'网址标题不能为空',
+        'title.max'=>'网站标题长度不能超过30个限度',
     ];
 }
