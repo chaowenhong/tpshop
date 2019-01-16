@@ -32,7 +32,8 @@ Route::rule('/home/sname','home/LoginController/sname');
 Route::rule('/home/spwd','home/LoginController/spwd');
 //执行验证码的页面
 Route::rule('/home/yanzhen','home/LoginController/yanzhen');
-
+//跳转到列表页
+Route::rule('/home/goods/[:id]','home/GoodsController/goods');
 
 
 // 登录
