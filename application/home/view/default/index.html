@@ -107,7 +107,7 @@
                                          {if $v['pid'] == 0}
                                         <li class="roshid-mainmenu-itm menu-item-has-children">
                                           
-                                            <a href="index.html" class="roshid-mainmenu-link">{$v['name']}</a>
+                                            <a href="/home/goods/{$v['id']}" class="roshid-mainmenu-link">{$v['name']}</a>
                                             {foreach $data as $val}
                                                {if $val['pid'] == $v['id']}
                                             <ul class="sub-menu">
@@ -175,7 +175,7 @@
         <div class="slider-area">
             <div class="slider-wrapper roshid-slider-wrapper owl-carousel" id="homepage-slider">
                 <!-- 第一张 -->
-                <div class="single-slider" style="background-image: url(/home/img/slider/fashion1.jpg);">
+                <div class="single-slider" style="background-image: url(/home/img/slider/fashion1.jpg);"><a href="">
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-8 col-md-8">
@@ -186,7 +186,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div></a>
                 </div>
                 <!-- Single Slider End -->
 

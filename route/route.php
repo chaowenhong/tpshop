@@ -24,6 +24,8 @@ Route::rule('/home/search_user','home/LoginController/search_user');
 Route::rule('/home/do_denglu','home/LoginController/do_denglu');
 //执行验证码的页面
 Route::rule('/home/search_yzm','home/LoginController/search_yzm');
+//跳转到列表页
+Route::rule('/home/goods/[:id]','home/GoodsController/goods');
 
 // 登录
 Route::rule('/admin/login_show','admin/LoginController/index');

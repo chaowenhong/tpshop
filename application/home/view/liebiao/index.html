@@ -1,0 +1,143 @@
+    {extend name="default/index"}
+
+     {block name="content"}
+			 <!-- Breadcumb area Start -->
+        <div class="breadcumb-area bg--black ptb--100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <ul class="breadcumb">
+                            <li class="roshid-breadcumb"><a class="roshid-breadcumb-link" href="/">首页</a></li>
+                            <li class="roshid-breadcumb"><a class="roshid-breadcumb-link current" href="">Shop</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Breadcumb area End -->
+
+        <!-- Main content wrapper Start -->
+        <div class="main-content-wrapper">
+            <div class="shop-area section-padding">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-3 order-lg-1 order-2">
+                            <!-- Sidebar Start -->
+                            <aside class="sidebar shop-sidebar">
+                                <div class="search-filter">
+
+                                    <!-- Category Search filter Start -->
+                                    <div class="filter-box mb--30">
+                                        <div class="filter-title">
+                                            <h2>商品分类</h2>
+                                        </div>
+                                        <ul class="search-filter-list">
+                                            <li class="custom-checkbox">
+                                                <input type="checkbox" name="bookandboardgame" id="cat" class="roshid-checkbox">
+                                                <label for="cat" class="roshid-checkbox-label">Dresses</label>
+                                            </li>                                          
+                                        </ul>
+                                    </div>
+                                    <!-- Category Search filter End -->
+
+                                </div>
+                            </aside>
+                            <!-- Sidebar End -->
+                        </div>
+                        <div class="col-lg-9 order-lg-2 order-1">                        
+                            <div class="shop-toolbar d-flex flex-md-row flex-column justify-content-between align-items-md-center">
+                                <div class="roshid-shop-grid-list">
+                                    <ul class="nav">
+                                        <li>
+                                            <a class="active" data-toggle="tab" href="#grid"><i class="fa fa-th"></i></a>
+                                        </li>
+                                        <li>
+                                            <a data-toggle="tab" href="#list"><i class="fa fa-list"></i></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="roshid-short">
+                                    <label>排序:</label>
+                                    <select class="short-select">
+                                        <option value="1">Position</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- Shop Layout Start -->
+                            <div class="main-shop-wrapper">
+                                <div class="tab-content" id="myTabContent-2">
+                                    <div class="tab-pane show active" id="grid">
+                                        <div class="product-grid-view">
+                                            <div class="row">
+
+											{foreach $good as $v}
+                                                <div class="col-xl-4 col-md-6">
+                                                    <!-- Product Box Start -->
+                                                    <div class="product-box variable-product">
+                                                        <div class="roshid-box-image"> 
+
+                                                            <img src="/photo/{$v['pic']}" alt="product image" class="primary_image" >
+                                                            <img src="/photo/{$v['pic']}" alt="product image" class="secondary_image" style="width:200px,height:300px;">
+                                                            <a href="{$v['id']}" data-toggle="modal" data-target="#productModal" class="quick-view"> <i class="fa fa-eye"></i> </a>
+                                                        </div>
+                                                        <div class="roshid-box-footer">
+                                                            <div class="roshid-box-desc">
+                                                                <a href="single-product.html" class="roshid-box-title">{$v['name']}</a>
+                                                                <p class="roshid-box-price">
+                                                                    <span class="sale-price">&dollar;{$v['price']}</span>
+                                                                </p>
+                                                            </div>
+                                                            <div class="roshid-box-link">
+                                                                <a href="cart.html" class="btn add-to-cart btn-style-7"><i class="fa fa-heart"></i> </a>                                                             <a href="cart.html" class="btn add-to-cart btn-style-7"><i class="fa fa-shopping-cart"></i> </a>                                                             <a href="cart.html" class="btn add-to-cart btn-style-7"><i class="fa fa-link"></i> </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Product Box End -->                        
+                                                </div>
+											    {/foreach}	
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="list">
+                                        <div class="product-list-view">
+									      {foreach $good as $v}
+                                            <div class="product-box product-box--list variable-product">
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <div class="roshid-box-image">
+                                                            <img src="/photo/{$v['pic']}" alt="product image" class="primary_image">
+                                                            <img src="/photo/{$v['pic']}" alt="product image" class="secondary_image">
+                                                            <a href="#" data-toggle="modal" data-target="#productModal" class="quick-view"> <i class="fa fa-eye"></i> </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <div class="roshid-box-desc">
+                                                            <a href="single-product.html" class="roshid-box-title">{$v['name']}</a>
+                                                            <p class="roshid-box-price">
+                                                                <span class="sale-price">&dollar;{$v['price']}</span>
+                                                                
+                                                            </p>
+                                                            <p class="roshid-box-descript">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium veritatis distinctio, recusandae sed, dolore perspiciatis, eaque ex ad itaque esse odio ab magni! Impedit molestias dicta aliquid ipsum accusantium repellendus aut!</p>
+                                                            <a href="cart.html" class="btn add-to-cart btn-style-2"><i class="fa fa-shopping-cart"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                              {/foreach}                                   
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="row mb-md--30">
+                                    
+                                </div>   
+                            </div>
+                            <!-- Shop Layout End -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+   
+     {/block}
