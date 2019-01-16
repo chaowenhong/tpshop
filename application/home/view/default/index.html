@@ -97,32 +97,33 @@
                         <div class="col-lg-10 col-md-10 col-sm-8 col-8">
                             <div class="roshid-header-bottom-right">
                                 <nav class="main-navigation roshid-main-navigation">
-                                    <!-- Mainmenu Start -->
+                                   
                                     <ul class="mainmenu roshid-main-menu">
                                       <li class="roshid-mainmenu-itm menu-item-has-children">
-                                    <a href="" class="roshid-mainmenu-link">
+                                    <a href="/" class="roshid-mainmenu-link">
                                             首页
                                            </a>
+                                        {foreach $data as $v}
+                                         {if $v['pid'] == 0}
                                         <li class="roshid-mainmenu-itm menu-item-has-children">
-                                           
-                                            <a href="index.html" class="roshid-mainmenu-link">挥手道别就</a>
+                                          
+                                            <a href="index.html" class="roshid-mainmenu-link">{$v['name']}</a>
+                                            {foreach $data as $val}
+                                               {if $val['pid'] == $v['id']}
                                             <ul class="sub-menu">
                                                 <li>
-                                                    <a href="index.html">Home Version 1</a>
+                                                    <a href="index.html">{$val['name']}</a>
                                                 </li>
-                                                <li>
-                                                    <a href="index-2.html">Home Version 2</a>
-                                                </li>
-                                                <li>
-                                                    <a href="index-3.html">Home Version 3</a>
-                                                </li>
-
-                                            </ul>
                                             
+                                            </ul>
+                                              {/if}
+                                            {/foreach}
                                         </li>
-                                        
+                                          {/if}
+                                     {/foreach}
                                     </ul>
-                                    <!-- Mainmenu End -->
+                                   
+                                   
                                 </nav>
                                 <!-- Header Cart Start -->
                                 <div class="header-cart header-area-cart">

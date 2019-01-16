@@ -7,7 +7,7 @@ use think\Model;
 class Goods extends Model
 {
      //数据表名
-     protected $table = 'goods';
+     protected $table = 'data_goods';
      //主键名
      protected $pk = 'id';
 

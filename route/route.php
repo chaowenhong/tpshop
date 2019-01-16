@@ -9,11 +9,22 @@
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
 
-Route::get('think', function () {
-    return 'hello,ThinkPHP5!';
-});
+//定义前台首页
+Route::rule('/','home/LoginController/index');
 
-Route::get('hello/:name', 'index/hello');
+//定义前台登录页
+Route::rule('/home/login','home/LoginController/login');
+//定义前台注册页面
+Route::rule('/home/zhuce','home/LoginController/zhuce');
+//定义执行注册页面
+Route::rule('/home/do_zhuce','home/LoginController/do_zhuce');
+//检测用户注册的是否存在
+Route::rule('/home/search_user','home/LoginController/search_user');
+//定义执行前台登录
+Route::rule('/home/do_denglu','home/LoginController/do_denglu');
+//执行验证码的页面
+Route::rule('/home/search_yzm','home/LoginController/search_yzm');
+
 // 登录
 Route::rule('/admin/login_show','admin/LoginController/index');
 // 登录名字检测
