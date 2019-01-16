@@ -26,31 +26,36 @@
                         <div class="col-lg-6 col-md-10">
                             <div class="form-box">
                                 <h1 class="text-center">登录</h1>
-                                <p class="text-center">请您认真登录</p>
+                                <p class="text-center">请填写正确信息</p>
                                 <form class="form" action="/home/do_denglu"  method="post">
                                     <div class="roshid-form-group row align-items-center">
                                         <div class="col-md-12 col-lg-12 col-12">
-                                            <input type="text" name="user" id="user" class="roshid-input-form" placeholder="用户名">
+                                            <i class="fa fa-times dc" style="display:none;color:red" aria-hidden="true"> 该用户名不存在,请重新输入*</i>
+                                            <i class="fa fa-exclamation dc" style="display:none;color:orange" aria-hidden="true">用户名不能为空*</i>
+                                            <i class="fa fa-check dc" style="display:none;color:green" aria-hidden="true"> 用户名输入正确</i>
+                                            <input type="text" name="user" id="user" class="roshid-input-form" placeholder="帐     号    请输入您的账号">
                                         </div>
                                     </div>
                                     <div class="roshid-form-group row align-items-center">
                                         <div class="col-md-12 col-lg-12 col-12">
-                                            <input type="password" name="pwd" id="pwd" class="roshid-input-form" placeholder="密码">
-                                            <button class="password-btn" type="button">密码</button>
+                                             <i class="fa fa-exclamation dc" style="display:none;color:orange" aria-hidden="true">密码输入错误*</i>
+                                             <i class="fa fa-exclamation dc" style="display:none;color:red" aria-hidden="true"> 密码不能为空*</i>
+                                             <i class="fa fa-check dc" style="display:none;color:green" aria-hidden="true"> 密码输入正确</i>
+                                            <input type="password" name="pwd" id="pwd" class="roshid-input-form" placeholder="密     码    请输入您的密码">
                                         </div>
                                     </div>
 
                                      <div class="roshid-form-group row align-items-center">
                                         <div class="col-md-12 col-lg-12 col-12">
-                                            <input type="text" name="yzm" id="yzm" class="roshid-input-form" placeholder="验证码">
-                                            <button class="password-btn" type="button">验证码</button>
+                                            <input type="text" name="yzm" id="yzm" class="roshid-input-form" placeholder="验证码    ↓请正确填写下面的验证码">
                                         </div>
                                     </div>
-                                      <div class="roshid-form-group row align-items-center">
-                                        <div class="col-md-12 col-lg-12 col-12">
-                                           <img src="/admin/search_yzm" onclick="alter('111')">
+                                     <div class="roshid-form-group row align-items-center">
+                                       <div class="col-md-12 col-lg-12 col-12 pull-center">
+                                        <img src="{:url('/home/yanzhen')}" alt="captcha" onclick="this.src='/home/yanzhen?'+Math.random()" />
                                         </div>
                                     </div>
+                                   
                                     
                                     <div class="roshid-form-group row align-items-center">
                                         <div class="col-lg-12 col-12 text-center">
@@ -59,7 +64,7 @@
                                         </div>
                                     </div>
                                 </form>
-                                <a class="create-account-link" href="/home/zhuce">新建的? 创建一个用户</a>
+                                <a class="create-account-link" href="/home/zhuce">没有账号? 创建一个账号</a>
                             </div>
                         </div>
                     </div>   

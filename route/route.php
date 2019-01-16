@@ -11,19 +11,29 @@
 
 //定义前台首页
 Route::rule('/','home/LoginController/index');
+// 前台登录名字检测
+Route::rule('/home/login_name','home/UserController/sname');
+// 前台登录密码检测
+Route::rule('/home/login_pwd','home/UserController/spwd');
+// 前台登录再次检测
+Route::rule('/home/dologin','home/LoginController/dologin');
 
 //定义前台登录页
 Route::rule('/home/login','home/LoginController/login');
+//定义执行前台登录
+Route::rule('/home/do_denglu','home/LoginController/do_denglu');
 //定义前台注册页面
 Route::rule('/home/zhuce','home/LoginController/zhuce');
 //定义执行注册页面
 Route::rule('/home/do_zhuce','home/LoginController/do_zhuce');
 //检测用户注册的是否存在
-Route::rule('/home/search_user','home/LoginController/search_user');
-//定义执行前台登录
-Route::rule('/home/do_denglu','home/LoginController/do_denglu');
+Route::rule('/home/sname','home/LoginController/sname');
+//检测用户密码是否为空
+Route::rule('/home/spwd','home/LoginController/spwd');
 //执行验证码的页面
-Route::rule('/home/search_yzm','home/LoginController/search_yzm');
+Route::rule('/home/yanzhen','home/LoginController/yanzhen');
+
+
 
 // 登录
 Route::rule('/admin/login_show','admin/LoginController/index');
@@ -43,7 +53,6 @@ Route::group([],function(){
 
 	// 退出登录
 	Route::rule('/admin/login_outs','admin/LoginController/out');
-
 	// 用户显示列表
 	Route::get('/admin/user_show','admin/UserController/index');
 	// 禁用用户显示列表
