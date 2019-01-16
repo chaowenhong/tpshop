@@ -45,7 +45,7 @@
                                  <td><input type="file" name="pic" form="myform"></td>
                                  <td><input type="text" name="address" form="myform" value="{:$data->address}" placeholder="请输入新的网站地址"></td>
                                  <td><input type="text" name="title" form="myform" value="{:$data->title}" placeholder="请输入新的网站标题"></td>
-                                 <td>{if $data['statue']==1}<a href="/admin/config_g/{:$data['id']}" title=""><button class="btn btn-md btn-primary">关闭</button></a>{else}<a href="/admin/config_k/{:$data['id']}" title=""><button class="btn btn-md btn-success">开启</button></a>{/if}</td>
+                                 <td>{if $data['statue']==1}<a href="/admin/config_g/{:$data['id']}" title=""><button class="btn btn-md btn-primary">关闭</button></a>{else}<a href="/admin/config_k/{:$data['id']}"><button class="btn btn-md btn-success">开启</button></a>{/if}</td>
                                  <!-- 网页维护图片 -->
                                  <td><input type="file" name="wpic"  form="myform"></td>
 

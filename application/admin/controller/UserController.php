@@ -234,9 +234,7 @@ class UserController extends Controller
                 try {
                      User::update($date,['uid'=>$id]);
                 } catch (Exception $e) {
-                   
-                   
-                    return $this->error('修改失败，请检查','/admin/user_show');
+                   return $this->error('修改失败，请检查','/admin/user_show');
                 }
                  
                 return $this->success('修改成功！','/admin/user_show');

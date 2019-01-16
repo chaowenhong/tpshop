@@ -49,11 +49,13 @@ class OtherController extends Controller
      *
      * @return \think\Response
      */
-    public function findex($id='')
+    public function findex($id=1)
     {
         // echo 2;die;
+        $datt =friend::where('id','=',$id)->select();
+        // dump($datt);
          $data = friend::select();
-        return view('friend/index',['data'=>$data,'id'=>$id]);
+        return view('friend/index',['datt'=>$datt,'data'=>$data,'id'=>$id]);
     }
      /**
      * 添加友情链接
@@ -63,29 +65,72 @@ class OtherController extends Controller
     public function fsave(Request $request)
     {
         $data =$request->post();
-        $file =$request->file();
-        dump($data['name']);
-        dump($file);
-      
+        $file =$request->file('pic');
+
         // 检测数据是否填写完整
-        if(empty($data['name'] && $data['address']){
+        if(empty($data['name'] && $data['address'])){
             return $this->error('数据必须填写完整');
         }
         // 检测图片是否上传
         if(empty($file)){
             return $this->error('链接必须添加一张图片');
+        }else{
+             // 移动上传图片到指定位置
+            $info = $file->move('friend');
+            // 获取图片的路径
+            $addr = $info->getSaveName();
+            // 设置文件路
+            $data['pic'] = $addr; 
         }
-        die;  
-        return view('config/index',['data'=>$data]);
+        // 所有信息完成后进行上传到数据库
+        // 判断是否添加成功
+        try{
+              friend::create($data,true);
+        } catch (\Exception $e) {
+             return $this->error('友情链接添加失败，请检查！');
+        }
+        // 添加成功
+        return $this->success('友情链接添加成功，请查看');
     }
     /**
-     * 显示创建资源表单页.
+     * 修改
      *
      * @return \think\Response
      */
-    public function create()
+    public function f_create(Request $request)
     {
-        //
+        $data = $request->post();
+        $file = $request->file();
+         dump($data);
+        dump($file);
+         die;
+        $id = $data['pid'];
+        dump($data);
+        
+        if(empty($file)){
+            $data['pic']=$data['ypic'];
+        }else{
+            // 移动上传图片到指定位置
+            $info = $file->move('friend');
+            // 获取图片的路径
+            $addr = $info->getSaveName();
+            // 设置文件路
+            $data['pic'] = $addr; 
+            if($data['ypic']){
+                // 获取原图片路径并且删除
+               $ypic = 'friend/'.$data['ypic'];
+               unlink($ypic); 
+               
+            }
+
+        }
+
+         try {
+                friend::update($data,['id'=>$id]);
+            } catch (Exception $e) {
+               return $this->error('修改失败，请检查');
+            }
+            return $this->success('修改友情链接成功！');
     }
 
     /**
@@ -158,6 +203,45 @@ class OtherController extends Controller
                 return $this->success('修改成功！','/admin/config');
     }
 
+    /**
+     * 删除友情链接
+     *
+     * @param  int  $id
+     * @return \think\Response
+     */
+    public function fdelete($id)
+    {
+        try {
+            friend::destroy($id);
+        } catch (Exception $e) {
+            return $this->error('删除失败');
+        }return $this->success('删除成功');
+    }
+    /**
+     * 关闭友情链接
+     *
+     * @return \think\Response
+     */
+    public function friendg($id,$sta='2')
+    {
+         $state = ['statue'=>$sta];
+        try {
+             friend::update($state,['id'=>$id]);
+        } catch (Exception $e){
+            return redirect('/admin/friend');
+        }
+       
+        return redirect('/admin/friend');
+    }
+    /**
+     * 打开友情链接
+     *
+     * @return \think\Response
+     */
+    public function friend_k($id)
+    {
+        return $this->friendg($id,1);
+    }
     /**
      * 显示指定的资源
      *
