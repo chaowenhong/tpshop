@@ -1,0 +1,236 @@
+/*
+    Template Name: Roshid - Minimal eCommerce Bootstrap 4 Template
+    Author: themedream1
+    Description: Minimal eCommerce Bootstrap 4 Template
+    Version: 1.0
+    URL: http://www.bootstrapmb.com
+*/
+
+@import url("../css/shortcode/default.css");
+@import url("../css/shortcode/helpers.css");
+@import url("../css/shortcode/banner.css");
+@import url("../css/shortcode/bundle.css");
+@import url("../css/shortcode/padding.css");
+@import url("../css/shortcode/header.css");
+@import url("../css/shortcode/footer.css");
+@import url("../css/shortcode/method.css");
+@import url("../css/shortcode/sidebar.css");
+@import url("../css/shortcode/categorynav.css");
+@import url("../css/shortcode/navigation.css");
+@import url("../css/shortcode/mobile-menu.css");
+@import url("../css/shortcode/form.css");
+@import url("../css/shortcode/custom-field.css");
+@import url("../css/shortcode/checkout-form.css");
+@import url("../css/shortcode/slider.css");
+@import url("../css/shortcode/button.css");
+@import url("../css/shortcode/tab.css");
+@import url("../css/shortcode/product.css");
+@import url("../css/shortcode/modal.css");
+@import url("../css/shortcode/blog.css");
+@import url("../css/shortcode/breadcrumb.css");
+@import url("../css/shortcode/pagination.css");
+@import url("../css/shortcode/team.css");
+@import url("../css/shortcode/comment.css");
+@import url("../css/shortcode/table.css");
+@import url("../css/shortcode/shop.css");
+@import url("../css/shortcode/single-product.css");
+
+/******************************
+
+INDEX:
+
+    01 - Default Css (../css/shortcode/default.css)
+    02 - Helpers Css (../css/shortcode/helpers.css)
+    03 - Banner Css (../css/shortcode/banner.css)
+    04 - Bundle Css (../css/shortcode/bundle.css)
+    05 - padding Css (../css/shortcode/padding.css)
+    06 - header Css (../css/shortcode/header.css)
+    07 - footer Css (../css/shortcode/footer.css)
+    08 - method Css (../css/shortcode/method.css)
+    09 - sidebar Css (../css/shortcode/sidebar.css)
+    10 - categorynav Css (../css/shortcode/categorynav.css)
+    11 - navigation Css (../css/shortcode/navigation.css)
+    12 - mobile-menu Css (../css/shortcode/mobile-menu.css)
+    13 - form Css (../css/shortcode/form.css)
+    14 - custom-field Css (../css/shortcode/custom-field.css)
+    15 - checkout-form Css (../css/shortcode/checkout-form.css)
+    16 - slider Css (../css/shortcode/slider.css)
+    17 - button Css (../css/shortcode/button.css)
+    18 - tab Css (../css/shortcode/tab.css)
+    19 - product Css (../css/shortcode/product.css)
+    20 - modal Css (../css/shortcode/modal.css)
+    21 - blog Css (../css/shortcode/blog.css)
+    22 - breadcrumb Css (../css/shortcode/breadcrumb.css)
+    23 - pagination Css (../css/shortcode/pagination.css)
+    24 - team Css (../css/shortcode/team.css)
+    25 - comment Css (../css/shortcode/comment.css)
+    26 - table Css (../css/shortcode/table.css)
+    27 - shop Css (../css/shortcode/shop.css)
+    28 - single-product Css (../css/shortcode/single-product.css)
+    29 - Animation CSS
+    30 - Checkout CSS
+    31 - Cart CSS
+    32 - About CSS
+    33 - Contact CSS
+    34 - 404 CSS
+
+******************************/
+
+@import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700|Roboto:300,400,500,700");
+
+
+
+
+/*****************************
+29. Animation CSS
+*****************************/
+
+@keyframes passing-reverse {
+  from {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(7%);
+    opacity: .6;
+  }
+  to {
+    transform: translateX(30%);
+    opacity: 0;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+
+
+/*****************************
+30. Checkout CSS
+*****************************/
+
+.order-details {
+  padding: 2rem;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+.checkout-payment {
+  border: 1px solid #ededed;
+  padding: 2rem;
+  border-radius: 10px;
+}
+
+.roshid-payment-info {
+  padding-left: 35px;
+  padding-top: 10px;
+}
+
+/*****************************
+31. Cart CSS
+*****************************/
+
+.cart-page-total h2 {
+  margin-bottom: 2rem;
+}
+
+.cart-page-total ul {
+  border-left: 1px solid #ededed;
+  border-top: 1px solid #ededed;
+  margin-bottom: 2rem;
+}
+
+.cart-page-total ul li {
+  border-right: 1px solid #ededed;
+  border-bottom: 1px solid #ededed;
+  padding: 1.5rem 2rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  -webkit-justify-content: space-between;
+  -moz-justify-content: space-between;
+  justify-content: space-between;
+}
+
+.cart-page-total ul li span {
+  font-weight: 500;
+}
+/*****************************
+32. About CSS
+*****************************/
+
+.about h3 {
+  font-weight: 600;
+  text-transform: capitalize;
+  margin-bottom: 2rem;
+  font-size: 25px;
+}
+
+.about p {
+  color: #2c2e3d;
+  font-size: 1.5rem;
+  line-height: 1.6;
+}
+
+/*****************************
+33. Contact CSS
+*****************************/
+
+.contact-left-item {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: flex;
+  padding-bottom: 1rem;
+}
+
+.contact-left-item i {
+  color: #555555;
+  font-size: 1.5rem;
+  margin-right: 2rem;
+  border: 1px solid #ddd;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  border-radius: 50%;
+}
+
+.contact-left-list p, .contact-left-list a {
+  color: #2c2e3d;
+  line-height: 1.6;
+  font-size: 1.4rem;
+}
+.contact-left-list p {
+  font-size: 2rem;
+}
+
+/*****************************
+34. 404 CSS
+*****************************/
+
+.error-text {
+  text-align: center;
+}
+
+.error-text h1 {
+  font-size: 18rem;
+}
+
+.error-text p {
+  color: #2c2e3d;
+  font-size: 1.8rem;
+  line-height: 1.6;
+  margin-bottom: 3rem;
+}
