@@ -37,6 +37,7 @@ Route::rule('/admin/dologin','admin/LoginController/dologin');
 Route::rule('/admin/verify','admin/LoginController/verify');
 // 登陆组
 Route::group([],function(){
+	
 	// 后台首页
 	Route::rule('/admin/admin_index','admin/AdminController/index');
 
@@ -140,4 +141,16 @@ Route::group(['name'=>'/admin/','prefix'=>'admin/OtherController/'],function(){
 	Route::get('friend_k/:id','friend_k');
 	// 修改友情链接
 	Route::rule('f_create/:id','f_create');
+	// 轮播图显示
+	Route::rule('lunpic/[:id]','lunpic');
+	// 轮播图添加
+	Route::rule('lunadd','lunadd');
+	// 轮播图修改
+	Route::rule('lunupd/:id','lunupd');
+	// 轮播图修改
+	Route::rule('dolunupd/:id','dolunupd');
+	// 轮播图修改
+	Route::rule('lundel/:id','lundel');
+	// 广告显示
+	Route::rule('gunangpic','gunangpic');
 })->middleware('InfoAdmin');
