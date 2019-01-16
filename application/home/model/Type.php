@@ -7,7 +7,7 @@ use think\Model;
 class Type extends Model
 {
    //数据表名
-   protected $table = 'type';
+   protected $table = 'data_type';
    //表主键
    protected $pk = 'id';
 

@@ -7,7 +7,7 @@ use think\Request;
 use app\home\model\Type;
 use app\home\model\Goods;
 use app\tools\Cattree;
-use app\home\model\Yh;
+use app\home\model\User;
 use think\captcha\Captcha;
 
 class LoginController extends Controller
@@ -21,8 +21,8 @@ class LoginController extends Controller
     {
         $data = Type::select();
         // 调用无限分类
-        $c = new Cattree($data);
-        $data = $c->getTree();
+        // $c = new Cattree($data);
+        // $data = $c->getTree();
         //dump($data);die;
        return view('/default/index',['data'=>$data]);
     }
