@@ -26,6 +26,8 @@ Route::rule('/home/do_denglu','home/LoginController/do_denglu');
 Route::rule('/home/search_yzm','home/LoginController/search_yzm');
 //跳转到列表页
 Route::rule('/home/goods/[:id]','home/GoodsController/goods');
+//购物车页面
+Route::rule('/home/list/:id','home/GoodsController/list');
 
 // 登录
 Route::rule('/admin/login_show','admin/LoginController/index');

@@ -50,14 +50,16 @@ class GoodsController extends Controller
     }
 
     /**
-     * 显示指定的资源
+     * 购物车方法
      *
      * @param  int  $id
      * @return \think\Response
      */
-    public function read($id)
+    public function list($id)
     {
-        //
+        $data = Goods::find($id);
+        //dump($data);die;
+        return view('list/list',['data'=>$data]);
     }
 
     /**
