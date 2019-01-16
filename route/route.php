@@ -128,5 +128,5 @@ Route::group(['name'=>'/admin/','prefix'=>'admin/OtherController/'],function(){
 	// 开启友情链接
 	Route::get('friend_k/:id','friend_k');
 	// 修改友情链接
-	Route::rule('f_create','f_create');
+	Route::rule('f_create/:id','f_create');
 })->middleware('InfoAdmin');
