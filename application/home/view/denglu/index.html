@@ -1,0 +1,70 @@
+     {extend name="default/index"}
+
+     {block name="content"}
+
+        <!-- Breadcumb area Start -->
+        <div class="breadcumb-area bg--black ptb--100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <ul class="breadcumb">
+                            <li class="roshid-breadcumb"><a class="roshid-breadcumb-link" href="">首页</a></li>
+                            <li class="roshid-breadcumb"><a class="roshid-breadcumb-link current" href="">登录</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Breadcumb area End -->
+
+        <!-- 登录页面 -->
+
+        <div class="main-content-wrapper">
+            <div class="page-inner section-padding">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-6 col-md-10">
+                            <div class="form-box">
+                                <h1 class="text-center">登录</h1>
+                                <p class="text-center">请您认真登录</p>
+                                <form class="form" action="/home/do_denglu"  method="post">
+                                    <div class="roshid-form-group row align-items-center">
+                                        <div class="col-md-12 col-lg-12 col-12">
+                                            <input type="text" name="user" id="user" class="roshid-input-form" placeholder="用户名">
+                                        </div>
+                                    </div>
+                                    <div class="roshid-form-group row align-items-center">
+                                        <div class="col-md-12 col-lg-12 col-12">
+                                            <input type="password" name="pwd" id="pwd" class="roshid-input-form" placeholder="密码">
+                                            <button class="password-btn" type="button">密码</button>
+                                        </div>
+                                    </div>
+
+                                     <div class="roshid-form-group row align-items-center">
+                                        <div class="col-md-12 col-lg-12 col-12">
+                                            <input type="text" name="yzm" id="yzm" class="roshid-input-form" placeholder="验证码">
+                                            <button class="password-btn" type="button">验证码</button>
+                                        </div>
+                                    </div>
+                                      <div class="roshid-form-group row align-items-center">
+                                        <div class="col-md-12 col-lg-12 col-12">
+                                           <img src="/admin/search_yzm" onclick="alter('111')">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="roshid-form-group row align-items-center">
+                                        <div class="col-lg-12 col-12 text-center">
+                                          
+                                            <button type="submit" class="btn btn--large btn-style-3">提交</button>
+                                        </div>
+                                    </div>
+                                </form>
+                                <a class="create-account-link" href="/home/zhuce">新建的? 创建一个用户</a>
+                            </div>
+                        </div>
+                    </div>   
+                </div>   
+            </div>
+        </div>
+     {/block}
+    

@@ -1,0 +1,64 @@
+     {extend name="default/index"}
+
+     {block name="content"}
+
+        <!-- Breadcumb area Start -->
+        <div class="breadcumb-area bg--black ptb--100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <ul class="breadcumb">
+                            <li class="roshid-breadcumb"><a class="roshid-breadcumb-link" href="">首页</a></li>
+                            <li class="roshid-breadcumb"><a class="roshid-breadcumb-link current" href="">注册</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Breadcumb area End -->
+
+        <!-- 注册页面 -->
+
+        <div class="main-content-wrapper">
+            <div class="page-inner section-padding">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-6 col-md-10">
+                            <div class="form-box">
+                                <h1 class="text-center">注册</h1>
+                                <p class="text-center">随便填填就可以了</p>
+                                <form action="/home/do_zhuce"  method="post">
+                                    <div id="error" style="color: red"></div>
+                                    <div class="roshid-form-group row align-items-center">
+                                        <div class="col-md-12 col-lg-12 col-12">
+                                            <input type="text" name="user" id="user" class="roshid-input-form" placeholder="用户名">
+                                        </div>
+                                    </div>
+                                   <div class="roshid-form-group row align-items-center">
+                                        <div class="col-md-12 col-lg-12 col-12">
+                                            <input type="password" name="pwd" id="pwd" class="roshid-input-form" placeholder="密码">
+                                        </div>
+                                    </div>
+                                     <div class="roshid-form-group row align-items-center">
+                                        <div class="col-md-12 col-lg-12 col-12">
+                                            <input type="password" name="repwd" id="repwd" class="roshid-input-form" placeholder="确认密码">
+                                        </div>
+                                    </div>
+                                    <div class="roshid-form-group row align-items-center">
+                                        <div class="col-lg-12 col-12 text-center">
+                                          
+                                            <button type="submit" id="tijiao"
+                                            class="btn btn--large btn-style-3">提交</button>
+                                        </div>
+                                    </div>
+                                </form>
+                                <a class="create-account-link" href="/home/login">已注册?进行登录</a>
+                            </div>
+                        </div>
+                    </div>   
+                </div>   
+            </div>
+  </div>
+ {/block}
+   
+    
