@@ -11,17 +11,16 @@
 
 //定义前台首页
 Route::rule('/','home/LoginController/index');
-// 前台登录名字检测
-Route::rule('/home/login_name','home/UserController/sname');
-// 前台登录密码检测
-Route::rule('/home/login_pwd','home/UserController/spwd');
-// 前台登录再次检测
-Route::rule('/home/dologin','home/LoginController/dologin');
-
 //定义前台登录页
 Route::rule('/home/login','home/LoginController/login');
-//定义执行前台登录
-Route::rule('/home/do_denglu','home/LoginController/do_denglu');
+// 前台登录名字检测
+Route::rule('/home/login_name','home/LoginController/login_name');
+// 前台登录密码检测
+Route::rule('/home/login_pwd','home/LoginController/login_pwd');
+// 前台登录再次检测并且登录
+Route::rule('/home/dologin','home/LoginController/dologin');
+
+
 //定义前台注册页面
 Route::rule('/home/zhuce','home/LoginController/zhuce');
 //定义执行注册页面

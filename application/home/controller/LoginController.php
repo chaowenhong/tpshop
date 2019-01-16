@@ -40,6 +40,51 @@ class LoginController extends Controller
         $data = Type::select();
         return view('zhuce/index',['data'=>$data]);
     }
+      /**
+        检测登录账号
+     */
+    public function login_name()
+    {
+
+        /// 获取输入的名字
+         $name = $_POST['uname'];
+         if(empty($name)){
+             return json_encode(['status'=>100]);
+         }
+         // 查询数据库中数据，看是否有该名字的数据
+         $data = User::where('uname','=',$name)->find();
+         if(empty($data)){
+                // 如果有用户名，传送数据200
+                return json_encode(['status'=>200]);
+         }
+                // 没有数据返回一个数据200
+                return json_encode(['status'=>400]);
+    } 
+     /**
+     * 检测登录密码
+     *
+     * @param  int  $id
+     * @return \think\Response
+     */
+    public function login_pwd()
+    {
+        // 获取输入的名字
+         $pwd = $_POST['pwd'];
+         $name = $_POST['uname'];
+         if(empty($pwd)){
+             return json_encode(['status'=>100]);
+         }
+         $pwd = md5($pwd);
+         // 查询数据库中数据，核对密码
+         $data = User::where('uname','=',$name)->where('pwd','=',$pwd)->find();
+         // return($data);
+         if(!empty($data)){
+               // 如果密码正确，传送数据400
+                return json_encode(['status'=>400]);
+         } // 密码错误返回一个数据200
+                return json_encode(['status'=>200]);
+             
+    } 
     /**
         检测用户名是否为空
      */
@@ -109,6 +154,7 @@ class LoginController extends Controller
       if(!empty($da)){
         return $this->error('该账号已经存在，重新输入账号名');
       }
+      $data['pwd'] = md5($data['pwd']);
         try{
             // true过滤字段
            User::create($data,true);
@@ -119,34 +165,34 @@ class LoginController extends Controller
 
     }
     //登录的执行方法
-    public function do_denglu(Request $request)
+    public function dologin(Request $request)
     {
 
-       $data = $request->post();
-        $uname = $data['user'];
-        //判断用户名不能为空
-        if(empty($uname)){
-            return $this->error('用户名不能为空','/home/login');
-        }
-        $zym = $data['yzm']; 
-        
-        $captcha = new captcha();
-         if(!$captcha->check($zym))
-         {
-            //验证码错误
-            return $this->error('验证码错误','/home/login');
-        }
-       
-        $pwd = $request->post('pwd',null,'md5');
-        $res = Yh::where('uname','=',$uname)->where('pwd','=',$pwd)->find();
-        if(empty($res)){
-         return $this->error('用户名或密码错误','/home/login');
-        }
-        //保存一条的数据来验证是否登录
-        session('dengluAdmin',true);
-        //保存用户信息
-        session('user',$res);
-       return $this->success('登录成功!!!','/');
+      $data = $request->post();
+      $code = $data['yanzhen'];
+      // 检测输入的验证码是否正确，$value为用户输入的验证码字符串
+      $captcha = new Captcha();
+      if(!$captcha->check($code))
+      {
+        // 验证失败
+        return $this->error('验证码错误，请重新输入');
+      }
+      $name = $data['uname'];
+      $pwd = md5($data['pwd']);
+      // 查询数据
+      $da = User::where('uname','=',$name)->where('pwd','=',$pwd)->find();
+      if(empty($da)){
+        return $this->error('账号或者密码不正确，请检查');
+      }
+      
+      if($da['state']==2){
+        return $this->error('该账号已经被禁止登录','/admin/login_show');
+      }
+      // 保存用户登录的信息
+      session('home_user',$da);
+      // 保存一个数据，验证登录
+      session('infohome',true);
+      return $this->success('登录成功！！','/');
     }
     
     //检测验证码的方法

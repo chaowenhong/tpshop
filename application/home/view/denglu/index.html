@@ -27,27 +27,27 @@
                             <div class="form-box">
                                 <h1 class="text-center">登录</h1>
                                 <p class="text-center">请填写正确信息</p>
-                                <form class="form" action="/home/do_denglu"  method="post">
+                                <form class="form" action="/home/dologin"  method="post">
                                     <div class="roshid-form-group row align-items-center">
                                         <div class="col-md-12 col-lg-12 col-12">
                                             <i class="fa fa-times dc" style="display:none;color:red" aria-hidden="true"> 该用户名不存在,请重新输入*</i>
                                             <i class="fa fa-exclamation dc" style="display:none;color:orange" aria-hidden="true">用户名不能为空*</i>
                                             <i class="fa fa-check dc" style="display:none;color:green" aria-hidden="true"> 用户名输入正确</i>
-                                            <input type="text" name="user" id="user" class="roshid-input-form" placeholder="帐     号    请输入您的账号">
+                                            <input type="text" name="uname" id="uname" class="roshid-input-form" placeholder="帐     号    请输入您的账号" autocomplete="off">
                                         </div>
                                     </div>
                                     <div class="roshid-form-group row align-items-center">
                                         <div class="col-md-12 col-lg-12 col-12">
-                                             <i class="fa fa-exclamation dc" style="display:none;color:orange" aria-hidden="true">密码输入错误*</i>
-                                             <i class="fa fa-exclamation dc" style="display:none;color:red" aria-hidden="true"> 密码不能为空*</i>
-                                             <i class="fa fa-check dc" style="display:none;color:green" aria-hidden="true"> 密码输入正确</i>
+                                            <i class="fa fa-exclamation dc" style="display:none;color:orange" aria-hidden="true"> 密码不能为空*</i>
+                                             <i class="fa fa-exclamation dc" style="display:none;color:red" aria-hidden="true">密码输入错误*</i>
+                                            <i class="fa fa-check dc" style="display:none;color:green" aria-hidden="true"> 密码输入正确</i>
                                             <input type="password" name="pwd" id="pwd" class="roshid-input-form" placeholder="密     码    请输入您的密码">
                                         </div>
                                     </div>
 
                                      <div class="roshid-form-group row align-items-center">
                                         <div class="col-md-12 col-lg-12 col-12">
-                                            <input type="text" name="yzm" id="yzm" class="roshid-input-form" placeholder="验证码    ↓请正确填写下面的验证码">
+                                            <input type="text" name="yanzhen" id="yanzhen" class="roshid-input-form" placeholder="验证码    ↓请正确填写下面的验证码" autocomplete="off">
                                         </div>
                                     </div>
                                      <div class="roshid-form-group row align-items-center">
@@ -55,12 +55,10 @@
                                         <img src="{:url('/home/yanzhen')}" alt="captcha" onclick="this.src='/home/yanzhen?'+Math.random()" />
                                         </div>
                                     </div>
-                                   
-                                    
                                     <div class="roshid-form-group row align-items-center">
                                         <div class="col-lg-12 col-12 text-center">
                                           
-                                            <button type="submit" class="btn btn--large btn-style-3">提交</button>
+                                            <button type="submit" class="btn btn--large btn-style-3">登录</button>
                                         </div>
                                     </div>
                                 </form>
@@ -70,6 +68,85 @@
                     </div>   
                 </div>   
             </div>
+            <script src="/admin/login/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript">
+        // 名称查询
+          $("#uname").blur(function(){
+              // 设置一个失去焦点的操作
+                 $(function(){  
+                    $.ajax({        
+                        type : 'post',       
+                        url : '/home/login_name',        
+                        dataType : 'json',       
+                        data : {  'uname' : $('#uname').val() },//这里的data是一个对象       
+                        success : function(data){  
+                             // console.log(data);
+                            let ob =  JSON.parse(data); 
+                        if(ob.status == 100){
+                                // 值为空
+                                $(".dc:eq(1)").show();
+                                $(".dc:eq(0)").hide();
+                                $(".dc:eq(2)").hide();
+                                $("#zhuce").attr("disabled",true);
+                            }
+                            if(ob.status == 200){
+                                // 账号不存在
+                                $(".dc:eq(0)").show();
+                                $(".dc:eq(1)").hide();
+                                $(".dc:eq(2)").hide();
+                                $("#zhuce").attr("disabled",true);
+                            }
+                            if(ob.status == 400){
+                                 // 正确
+                                $(".dc:eq(0)").hide();
+                                $(".dc:eq(1)").hide();
+                                $(".dc:eq(2)").show();
+                                $("#zhuce").attr("disabled",false);
+                            }
+                        }, 
+                    });
+                  });
+            });
+             // 密码查询
+          $("#pwd").blur(function(){
+              // 设置一个失去焦点的操作
+             $(function(){  
+                $.ajax({        
+                    type : 'post',       
+                    url : '/home/login_pwd',        
+                    dataType : 'json',       
+                    data : {  'pwd' : $('#pwd').val(),'uname' : $('#uname').val() },//这里的data是一个对象       
+                    success : function(data){  
+                         // console.log(data);
+                        let ob =  JSON.parse(data); 
+                        if(ob.status == 100){
+                            // 值为空
+                            $(".dc:eq(3)").show();
+                            $(".dc:eq(4)").hide();
+                            $(".dc:eq(5)").hide();
+                            $("#zhuce").attr("disabled",true);
+                        }
+                        if(ob.status == 200){
+                            // 密码错误
+                            $(".dc:eq(4)").show();
+                            $(".dc:eq(3)").hide();
+                            $(".dc:eq(5)").hide();
+                            $("#zhuce").attr("disabled",true);
+                        }
+                        if(ob.status == 400){
+                             // 正确
+                            $(".dc:eq(5)").show();
+                            $(".dc:eq(3)").hide();
+                            $(".dc:eq(4)").hide();
+                             $("#zhuce").attr("disabled",false);
+                        }
+                       
+                    }, 
+                });
+              });
+            });
+          
+    </script>
         </div>
      {/block}
     
