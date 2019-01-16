@@ -99,19 +99,18 @@ class OtherController extends Controller
      */
     public function f_create(Request $request)
     {
+        // 获取文字类数据
         $data = $request->post();
+        // 获取文件类型数据
         $file = $request->file();
-         dump($data);
-        dump($file);
-         die;
+        // 获取id
         $id = $data['pid'];
-        dump($data);
-        
+        // 查看是否有图片上传
         if(empty($file)){
             $data['pic']=$data['ypic'];
         }else{
             // 移动上传图片到指定位置
-            $info = $file->move('friend');
+            $info = $file['pic']->move('friend');
             // 获取图片的路径
             $addr = $info->getSaveName();
             // 设置文件路
