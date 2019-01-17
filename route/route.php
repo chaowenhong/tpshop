@@ -11,7 +11,6 @@
 
 //定义前台首页
 Route::rule('/','home/LoginController/index');
-
 //定义前台登录页
 Route::rule('/home/login','home/LoginController/login');
 //定义前台注册页面
