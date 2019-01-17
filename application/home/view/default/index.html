@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="description" content="this is a demo meta description">
     <meta name="keywords" content="this is a demo meta keywords">
-    <title>标题</title>
+    <title>tpshop</title>
 
     <!-- Favicons -->
     <link rel="shortcut icon" href="/home/img/favicon.ico">
@@ -50,10 +50,16 @@
                             <!-- 登录注册 -->
                             <div class="language-currancy roshid-language-currancy d-flex justify-content-md-start justify-content-center">
                                 <div class="language-selector language-currancy-dropdown">
-                                    <div class="dropdown roshid-top-dropdown">
+                                    <div style="{if !empty(session('home_user'))}display:none{/if}" class="dropdown roshid-top-dropdown">
                                       <a href="/home/login" class="roshid-mainmenu-link">   
                                         <img src="/home/img/language/1.png" alt="English"> 
-                                        登录</a></div>
+                                        登录</a>
+                                    </div>
+
+                                    <div  style="{if empty(session('home_user'))}display:none{/if}" class="dropdown roshid-top-dropdown">
+                                        <a href="/home/onlyuser" title="">{if !empty(session('home_user'))}{:session('home_user')->uname}{/if}</a>
+                                        <a href="/home/userout" title="">退出</a>
+                                    </div>
                                 </div>
                                 <div class="currency-selector language-currancy-dropdown">
                                     <div class="dropdown roshid-top-dropdown">

@@ -77,6 +77,14 @@
     <script type="text/javascript">
         // 名称查询
           $("#uname").blur(function(){
+              // 获取焦点
+               $("#uname").focus(function(){
+                    $("#uname").attr('placeholder','');
+               });
+                // 获取焦点
+               $("#pwd").focus(function(){
+                    $("#pwd").attr('placeholder','');
+               });
               // 设置一个失去焦点的操作
              $(function(){  
                 $.ajax({        
@@ -93,6 +101,7 @@
                             $(".dc:eq(0)").hide();
                             $(".dc:eq(2)").hide();
                             $("#zhuce").attr("disabled",true);
+                             $("#uname").css('border-color','red');
                         }
                         if(ob.status == 200){
                             // 账号已经存在
@@ -100,6 +109,7 @@
                             $(".dc:eq(1)").hide();
                             $(".dc:eq(2)").hide();
                             $("#zhuce").attr("disabled",true);
+                             $("#uname").css('border-color','red');
                         }
                         if(ob.status == 400){
                              // 正确
@@ -107,6 +117,7 @@
                             $(".dc:eq(1)").hide();
                             $(".dc:eq(2)").show();
                             $("#zhuce").attr("disabled",false);
+                             $("#uname").css('border-color','');
                         }
                     }, 
                 });
@@ -130,6 +141,7 @@
                             $(".dc:eq(4)").hide();
                             $(".dc:eq(5)").hide();
                             $("#zhuce").attr("disabled",true);
+                            $("#pwd").css('border-color','red');
                         }
                         if(ob.status == 200){
                             // 账号已经存在
@@ -137,6 +149,7 @@
                             $(".dc:eq(3)").hide();
                             $(".dc:eq(5)").hide();
                             $("#zhuce").attr("disabled",true);
+                             $("#pwd").css('border-color','red');
                         }
                         if(ob.status == 400){
                              // 正确
@@ -144,6 +157,7 @@
                             $(".dc:eq(3)").hide();
                             $(".dc:eq(4)").hide();
                              $("#zhuce").attr("disabled",false);
+                              $("#pwd").css('border-color','');
                         }
                        
                     }, 

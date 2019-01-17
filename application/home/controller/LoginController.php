@@ -8,11 +8,21 @@ use app\home\model\Type;
 use app\home\model\Goods;
 use app\tools\Cattree;
 use app\home\model\User;
+use app\home\model\Config;
 use think\captcha\Captcha;
-
 class LoginController extends Controller
 {
 
+     // 
+     // 公共
+     // 
+     // 
+    public function userout()
+    {
+        session('infohome',false);
+        session('home_user',null);
+        return $this->success('退出成功！','/home/login');
+    }
 
     /**
      * 显示资源列表
@@ -40,6 +50,7 @@ class LoginController extends Controller
         $data = Type::select();
         return view('zhuce/index',['data'=>$data]);
     }
+
       /**
         检测登录账号
      */
@@ -196,8 +207,9 @@ class LoginController extends Controller
     }
     
     //检测验证码的方法
-    public function yanzhen()
+    public function yan()
     {
+      
         $config =    [
          // 验证码字体大小
         'fontSize'    => 20,    
@@ -214,6 +226,7 @@ class LoginController extends Controller
         // 背景颜色
         'bg' => [240, 220, 220],
         ];
+
         $captcha = new Captcha($config);
         return $captcha->entry();
     }
@@ -221,21 +234,21 @@ class LoginController extends Controller
   
    
     /**
-     * 显示创建资源表单页.
-     *
-     * @return \think\Response
-     */
+    * 显示创建资源表单页.
+    *
+    * @return \think\Response
+    */
     public function create()
     {
         //
     }
 
     /**
-     * 保存新建的资源
-     *
-     * @param  \think\Request  $request
-     * @return \think\Response
-     */
+    * 保存新建的资源
+    *
+    * @param  \think\Request  $request
+    * @return \think\Response
+    */
     public function save(Request $request)
     {
         //

@@ -52,7 +52,7 @@
                                     </div>
                                      <div class="roshid-form-group row align-items-center">
                                        <div class="col-md-12 col-lg-12 col-12 pull-center">
-                                        <img src="{:url('/home/yanzhen')}" alt="captcha" onclick="this.src='/home/yanzhen?'+Math.random()" />
+                                       <img src="{:url('/home/yan')}" alt="captcha" onclick="this.src='/home/yan?'+Math.random()"/>
                                         </div>
                                     </div>
                                     <div class="roshid-form-group row align-items-center">
@@ -70,6 +70,14 @@
             </div>
             <script src="/admin/login/js/jquery-3.3.1.min.js"></script>
     <script type="text/javascript">
+        // 获取焦点
+       $("#uname").focus(function(){
+            $("#uname").attr('placeholder','');
+       });
+        // 获取焦点
+       $("#pwd").focus(function(){
+            $("#pwd").attr('placeholder','');
+       });
         // 名称查询
           $("#uname").blur(function(){
               // 设置一个失去焦点的操作
@@ -88,6 +96,7 @@
                                 $(".dc:eq(0)").hide();
                                 $(".dc:eq(2)").hide();
                                 $("#zhuce").attr("disabled",true);
+                                $("#uname").css('border-color','red');
                             }
                             if(ob.status == 200){
                                 // 账号不存在
@@ -95,6 +104,7 @@
                                 $(".dc:eq(1)").hide();
                                 $(".dc:eq(2)").hide();
                                 $("#zhuce").attr("disabled",true);
+                                  $("#uname").css('border-color','red');
                             }
                             if(ob.status == 400){
                                  // 正确
@@ -102,6 +112,7 @@
                                 $(".dc:eq(1)").hide();
                                 $(".dc:eq(2)").show();
                                 $("#zhuce").attr("disabled",false);
+                               $("#uname").css('border-color','');
                             }
                         }, 
                     });
@@ -125,12 +136,14 @@
                             $(".dc:eq(4)").hide();
                             $(".dc:eq(5)").hide();
                             $("#zhuce").attr("disabled",true);
+                             $("#pwd").css('border-color','red');
                         }
                         if(ob.status == 200){
                             // 密码错误
                             $(".dc:eq(4)").show();
                             $(".dc:eq(3)").hide();
                             $(".dc:eq(5)").hide();
+                             $("#pwd").css('border-color','red');
                             $("#zhuce").attr("disabled",true);
                         }
                         if(ob.status == 400){
@@ -139,6 +152,7 @@
                             $(".dc:eq(3)").hide();
                             $(".dc:eq(4)").hide();
                              $("#zhuce").attr("disabled",false);
+                              $("#pwd").css('border-color','');
                         }
                        
                     }, 

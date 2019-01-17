@@ -80,8 +80,10 @@ class OtherController extends Controller
             $info = $file->move('friend');
             // 获取图片的路径
             $addr = $info->getSaveName();
+             // 重新生成图片地址
+            $dat = str_replace('\\', '/', $addr);
             // 设置文件路
-            $data['pic'] = $addr; 
+            $data['pic'] = $dat; 
         }
         // 所有信息完成后进行上传到数据库
         // 判断是否添加成功
@@ -114,14 +116,15 @@ class OtherController extends Controller
             $info = $file['pic']->move('friend');
             // 获取图片的路径
             $addr = $info->getSaveName();
+              // 重新生成图片地址
+            $dat = str_replace('\\', '/', $addr);
             // 设置文件路
-            $data['pic'] = $addr; 
+            $data['pic'] = $dat; 
             if($data['ypic']){
                 // 获取原图片路径并且删除
                $ypic = 'friend/'.$data['ypic'];
                unlink($ypic); 
-               
-            }
+             }
 
         }
 
@@ -275,7 +278,9 @@ class OtherController extends Controller
             // 移动图片到指定地方
             $in = $file->move('lunpic');
             // 获取图片的路
-            $dat = $in->getSaveName();
+            $addr = $in->getSaveName();
+            // 重新生成图片地址
+             $dat = str_replace('\\', '/', $addr);
             // 进行赋值
             $data['lpic']=$dat; 
         }
