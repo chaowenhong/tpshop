@@ -29,7 +29,6 @@
                                             <table class="table">
                                                 <thead>
                                                     <tr>
-                                                        <th>ID</th>
                                                         <th>订单号码</th>
                                                         <th>商品名称</th>
                                                         <th>商品数量</th>
@@ -42,12 +41,11 @@
                                                 <tbody>
                                                 {foreach $dat as $v}
                                                     <tr>
-                                                        <td>{:$v['id']}</td>
                                                         <td>{:$v['number']}</td>
                                                         <td>{:$v['goodsname']}</td>
                                                         <td>{:$v['goodssum']}件</td>
                                                         <td><strong>￥{:$v['ordnum']}</strong></td>
-                                                        <td>{:$v['create_time']}</td>
+                                                        <td>{:$v['createtime']}</td>
                                                         <td>{if $v->state==1}<font style="color:red">未发货</font>{elseif $v->state==2}<font style="color:green">已发货</font>{/if}</td>
                                                         <td><a href="/home/order_del/{:$v['id']}" title="" style="color:red">删除</a></td>
                                                     </tr>
