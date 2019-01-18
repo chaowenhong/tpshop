@@ -1,0 +1,73 @@
+  {extend name="default/index"}
+
+     {block name="content"}
+        <!-- Header area End -->
+
+        <!-- Breadcumb area Start -->
+        <div class="breadcumb-area bg--black ptb--100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <ul class="breadcumb">
+                            <li class="roshid-breadcumb"><a class="roshid-breadcumb-link" href="/">首页</a></li>
+                            <li class="roshid-breadcumb"><a class="roshid-breadcumb-link current" href="">购物车</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Breadcumb area End -->
+
+        <!-- Main content wrapper start -->
+        <div class="main-content-wrapper">
+            <div class="cart-area ptb--60">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-12">
+                                    <!-- Cart Area Start -->
+                                    <form action="#" class="form form--cart">
+                                        <div class="cart-table table-content table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>图片</th>
+                                                        <th>产品</th>
+                                                        <th>单价</th>
+                                                        <th>数量</th>
+                                                        <th>总价</th>
+                                                        <th>操作</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                {foreach $data as $v}
+                                                    <tr>
+                                                        <td>
+                                                            <a href=""><img src="/photo/{$v['pic']}" alt="product"></a>
+                                                        </td>
+                                                        <td class="cart-product-price"><h3><a href="#">{$v['name']}</a></h3></td>
+                                                        <td><strong>${$v['price']}</strong></td>
+                                                        <td>
+                                                            <div class="quantity">
+                                                                <input type="number" class="quantity-input" name="qty" id="qty1" value="1">
+                                                            </div>
+                                                        </td>
+                                                        <td><strong>$16.00</strong></td>
+                                                        <td><a href="#"><i class="fa fa-trash remove"></i></a></td>
+                                                    </tr>
+                                                   {/foreach}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </form>
+                                    <!-- Cart Area End -->  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>      
+            </div>
+        </div>
+        <!-- Main content wrapper end -->
+        {/block}

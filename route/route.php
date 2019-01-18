@@ -45,6 +45,8 @@ Route::rule('/home/spwd','home/LoginController/spwd');
 Route::rule('/home/yan','home/LoginController/yan');
 //跳转到列表页
 Route::rule('/home/goods/[:id]','home/GoodsController/goods');
+//购物车页面
+Route::rule('/home/list/:id','home/GoodsController/list');
 
 
 // 登录
