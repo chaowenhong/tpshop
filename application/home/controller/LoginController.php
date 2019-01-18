@@ -6,6 +6,7 @@ use think\Controller;
 use think\Request;
 use app\home\model\Type;
 use app\home\model\Goods;
+use app\common\model\Order;
 use app\tools\Cattree;
 use app\home\model\User;
 use app\home\model\Config;
@@ -234,15 +235,87 @@ class LoginController extends Controller
   
    
     /**
-    * 显示创建资源表单页.
+    * 显示个人中心.
     *
     * @return \think\Response
     */
-    public function create()
+    public function onlyuser()
     {
-        //
+        $data = Type::select();
+        $info = session('home_user');
+        $id = $info['uid'];
+        // dump($info);
+        $dat = User::where('uid','=',$id)->find();
+        return view('only/onlyuser',['data'=>$data,'dat'=>$dat]);
     }
-
+     /**
+     * 修改资料操作
+     *
+     * @param  \think\Request  $request
+     * @param  int  $id
+     * @return \think\Response
+     */
+    public function user_upd(Request $request, $id)
+    {
+        $date = $request->post();
+        $idd = session('user');
+         // 获取隐藏于传送的值
+        $file = $request->file();
+        // 判断是否修改了原图片
+        if(empty($file)){
+            // 没有修改原图
+            $date['upic'] = $date['ypic'];
+        }else{
+            // 移动上传图片到指定位置
+            $info = $file['upic']->move('upic');
+            // 获取图片的路径
+            $addr = $info->getSaveName();
+            // 保存到数组
+            $date['upic'] = $addr; 
+            if($date['ypic']){
+                // 获取原图片路径并且删除
+               $ypic = 'upic/'.$date['ypic'];
+               unlink($ypic); 
+               
+            }
+        } 
+       try {
+             User::update($date,['uid'=>$id]);
+        } catch (Exception $e) {
+           return $this->error('修改失败，请检查','/home/onlyuser');
+        }
+         
+        return redirect('/home/onlyuser');
+             
+        }
+    /**
+     * 显示
+     *
+     * @param  int  $id
+     * @return \think\Response
+     */
+    public function order_show($id)
+    {
+         $data = Type::select();
+         $user = session('home_user');
+         $dat = Order::where('sid','=',$user['uid'])->select();
+         // dump($dat);
+        return view('order/index',['data'=>$data,'dat'=>$dat]);
+    }
+     /**
+     * 显示编辑资源表单页.
+     *
+     * @param  int  $id
+     * @return \think\Response
+     */
+    public function order_del($id)
+    {
+        try {
+            Order::destroy($id);
+        } catch (Exception $e) {
+            return redirect('/');
+        } return redirect('/');
+    }
     /**
     * 保存新建的资源
     *
@@ -251,6 +324,8 @@ class LoginController extends Controller
     */
     public function save(Request $request)
     {
+
+
         //
     }
 

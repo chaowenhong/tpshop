@@ -4,6 +4,7 @@ namespace app\http\middleware;
 
 class infoHome
 {
+	use \traits\controller\Jump;
     public function handle($request, \Closure $next)
     {
     	if(empty(session('infohome'))){

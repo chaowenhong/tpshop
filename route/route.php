@@ -21,9 +21,16 @@ Route::rule('/home/login_pwd','home/LoginController/login_pwd');
 Route::rule('/home/dologin','home/LoginController/dologin');
 // 前台用户退出
 Route::rule('/home/userout','home/LoginController/userout');
-// 前台用户个人中心
-Route::rule('/home/onlyuser','home/LoginController/onlyuser');
-
+Route::group([],function(){
+	// 前台用户个人中心
+	Route::rule('/home/onlyuser','home/LoginController/onlyuser');
+	// 前台用户个人中心修改
+	Route::rule('/home/user_upd/:id','home/LoginController/user_upd');	
+	// 前台用户订单
+	Route::rule('/home/order_show/:id','home/LoginController/order_show');
+	// 前台用户个人中心修改
+	Route::rule('/home/order_del/:id','home/LoginController/order_del');
+})->middleware('infoHome');
 
 
 //定义前台注册页面

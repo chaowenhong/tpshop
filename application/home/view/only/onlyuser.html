@@ -1,0 +1,162 @@
+{extend name="default/index"}
+{block name="content"}
+        <style type="text/css" media="screen">
+            .fo{
+                color:#9d9fa2;
+                font-size:18px;
+            }
+            .round_icon{
+              width: 120px;
+              height: 120px;
+              display: flex;
+              border-radius: 40%;
+              align-items: center;
+              justify-content:center;
+              overflow: hidden;
+            }
+            #yangzi{
+          
+                background: url(/photo/2.png);
+            }
+        </style>
+        <!-- Breadcumb area Start -->
+        <div class="breadcumb-area bg--black ptb--100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <ul class="breadcumb">
+                            <li class="roshid-breadcumb"><a class="roshid-breadcumb-link" href="/">首页</a></li>
+                            <li class="roshid-breadcumb"><a class="roshid-breadcumb-link current" href="">个人中心</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Breadcumb area End -->
+
+        <!-- Main content wrapper start -->
+
+        <div class="main-content-wrapper">
+            <div class="checkout-area">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <!-- Checkout Area Start -->
+                            <div class="checkout-area ptb--60">
+                                <div class="row">
+                                    <div class="col-lg-7">
+                                        <div class="custom-title">
+                                            <h2>详细信息</h2>
+                                        </div>
+                                 <form action="/home/user_upd/{$dat['uid']}" method="post" enctype="multipart/form-data" accept-charset="utf-8">
+                                    <input type="hidden" name="ypic" value="{$dat['upic']}">
+                                    <input type="hidden" name="power" value="{$dat['power']}">
+                                        <div class="checkout-form">
+                                   
+                                        <div class="order-details mb--30">
+                                            <div align="center">
+                                                <img src="{if empty($dat['upic'])}http://placehold.it/200x200/0f0/ccc.png{else}/upic/{:$dat['upic']}{/if}" class="round_icon"  alt="">
+                                            </div>
+                                            <hr>
+                                            <div align="center">
+                                                <font class="fo">注册时间 ：</font>{:$dat['create_time']}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <font class="fo">修改时间 ：</font>{:$dat['update_time']}
+                                             </div>
+                                        </div>
+                                                <div class="form-row mb--30">
+                                                    <div class="roshid-form-group col-12 up" style="display: none">
+                                                         <div class="roshid-form-group col-md-3"><font class="fo wz">头像修改：</font></div>
+                                                        <input type="file" name="upic"  class="btn-style-2 up" id="tx" placeholder=" 修改头像">
+                                                    </div> 
+                                                </div>
+                                                <div class="form-row mb--30">
+                                                    <div class="roshid-form-group col-md-12">
+                                                         <div class="roshid-form-group col-md-3"><font class="fo">真实姓名：</font></div>
+                                                        <input type="text" name="zname"  class="roshid-input-form up" placeholder="真实姓名未保存" value="{:$dat['zname']}" disabled="true">
+                                                    </div>
+                                                </div>
+                                                <div class="form-row mb--30">
+                                                    <div class="roshid-form-group col-md-12">
+                                                    <div class="roshid-form-group col-md-3"><font class="fo">账号名字：</font></div>
+                                                        <input type="text" name="uname" class="roshid-input-form" placeholder="" value="{:$dat['uname']}" disabled="true">
+                                                    </div>
+                                                </div>
+                                                <div class="form-row mb--30">
+                                                    <div class="roshid-form-group col-md-12">
+                                                         <div class="roshid-form-group col-md-3"><font class="fo">用户性别：</font></div>
+                                                         <input type="text" name="sex" class="roshid-input-form" placeholder="女" value="{if $dat['sex']==1}男{elseif $dat['sex']==2}女{elseif $dat['sex']==3}保密{/if}" id="sexx" disabled="true">
+                                                        <select name="sex" class="roshid-input-form" id="sexm" style="display: none" >
+                                                            <option {if $dat['sex']==1}selected{/if} value="1">男</option>
+                                                            <option {if $dat['sex']==2}selected{/if} value="2">女</option>
+                                                            <option {if $dat['sex']==3}selected{/if} value="3">保密</option>
+                                                        </select>
+                                                    </div>
+                                                    
+                                                </div>
+                                                <div class="form-row mb--30">
+                                                <div class="roshid-form-group col-md-12">
+                                                      <div class="roshid-form-group col-md-3"><font class="fo">电子邮件：</font></div>
+                                                        <input type="email" name="email" id="bill_email" class="roshid-input-form up" value="{:$dat['email']}" placeholder="暂无邮箱" disabled="true">
+                                                </div>  
+                                                </div>
+                                                <div class="form-row mb--30">
+                                                    <div class="roshid-form-group col-md-12">
+                                                     <div class="roshid-form-group col-md-3"><font class="fo">电话号码：</font></div><input type="text" name="tel" id="zip" class="roshid-input-form up" placeholder="暂未填写" value="{:$dat['tel']}" disabled="true">
+                                                    </div>
+                                                </div>
+                                                </div> 
+                                            </div>
+                                            <div class="col-lg-5 mt-md--30">
+                                               <div class="custom-title">
+                                                    <h2>修改设置</h2>
+                                                </div>
+                                                <div class="checkout-payment">
+                                                        <div class="roshid-form-group col-md-6"><font class="fo">个性签名：</font></div>
+                                                        <div class="form-row">
+                                                            <div class="roshid-form-group col-12">
+                                                                <textarea class="roshid-input-form roshid-input-form--textarea up" id="orderNotes" name="content" disabled="true" placeholder="这里面你可以填写您的个人简介（暂无）">{:$dat['content']}</textarea>
+                                                            </div>
+                                                         </div> 
+                                                </div>
+                                                <div class="roshid-form-group col-12 up">
+                                                        <button type="submit" id="bao" style="display: none" class="btn btn-style-3 btn--fullwidth up">保存 </button> 
+                                                </div>
+                                                </form>
+                                                <div class="roshid-form-group col-12 xiu">
+                                                    <button type="submit"  class="btn btn-style-3 btn--fullwidth xiu">{if empty($dat['upic'])}完善{else}修改{/if}资料</button>
+                                                </div>
+                                                <div class="roshid-form-group col-12">
+                                                    <button type="submit" class="btn btn-style-3 btn--fullwidth"><a href="/home/order_show/{:$dat['uid']}" title="">查看订单</a></button>
+                                                </div>
+                                                <div class="roshid-form-group col-12">
+                                                    <button type="submit" class="btn btn-style-3  btn--fullwidth"><a href="/home/order_show" title="">查看购物车</a></button>
+                                                </div>
+                                                <div class="checkout-payment"  id="yangzi" >
+                                                    <textarea name="" style="width:418px;height:152px" style="resize:none" placeholder="可以进行一些简单记录！！"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                              <script src="/admin/login/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+    $('.xiu').click(function(){
+        $('.up').show();
+        $('.wz').show();
+        $('#sexm').show();
+        $('.xiu').hide();
+        $('#sexx').hide();
+        $('.up').attr("disabled",false);
+    });
+    
+</script>
+                            <!-- Checkout Area End -->
+                        </div>
+                    </div> 
+                </div>     
+            </div>
+        </div>
+{/block}
+
+  
