@@ -30,6 +30,9 @@
                                                 <thead>
                                                     <tr>
                                                         <th>订单号码</th>
+                                                        <th>收货人</th>
+                                                        <th>联系方式</th>
+                                                        <th>收货地点</th>
                                                         <th>商品名称</th>
                                                         <th>商品数量</th>
                                                         <th>价格总计</th>
@@ -42,6 +45,9 @@
                                                 {foreach $dat as $v}
                                                     <tr>
                                                         <td>{:$v['number']}</td>
+                                                        <td>{:$v['name']}</td>
+                                                        <td>{:$v['tel']}</td>
+                                                        <td>{:$v['address1'].$v['address2'].$v['address3'].$v['address4']}</td>
                                                         <td>{:$v['goodsname']}</td>
                                                         <td>{:$v['goodssum']}件</td>
                                                         <td><strong>￥{:$v['ordnum']}</strong></td>

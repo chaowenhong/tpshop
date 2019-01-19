@@ -7,6 +7,7 @@ use think\Request;
 use app\common\model\Goods;
 use app\common\model\Type;
 use app\tools\Cattree;
+
 class GoodsController extends Controller
 {
     /**
@@ -40,6 +41,7 @@ class GoodsController extends Controller
         $a = new Cattree($date);
         // 获取处理后的数据
         $datas = $a->getTree();
+       
         // dump($data);
         return view('goods/index',['data'=>$data,'datas'=>$datas]);
     }
@@ -87,15 +89,11 @@ class GoodsController extends Controller
             $info = $file->move('photo');
             // 获取图片的路径
             $addr = $info->getSaveName();
-            // 图片缩放
-            $image = \think\Image::open('photo/'.$addr);
+         
             // 生成一个新图片名字
-            $newname = str_replace('\\', '\sl_', $addr);
-            // echo $newname; echo'<hr>';
-            // die;
-            // 按照原图的比例生成一个最大为150*150的缩略图并保存为thumb.png
-           $im = $image->thumb(150, 150)->save('photo\\'.$newname);
-            $data['pic'] = $addr; 
+            $newname = str_replace('\\', '/', $addr);
+            // 加入名字
+            $data['pic'] = $newname; 
         }
              
         // dump($data);die;
@@ -159,18 +157,15 @@ class GoodsController extends Controller
             $info = $file['pic']->move('photo');
             // 获取图片的路径
             $addr = $info->getSaveName();
-            // 图片缩放
-            $image = \think\Image::open('photo/'.$addr);
             // 生成一个新图片名字
-            $newname = str_replace('\\', '/sl'.$addr, $addr);
-           // 按照原图的比例生成一个最大为150*150的缩略图并保存为thumb.png
-            $suo = $image->thumb(150, 150)->save('photo/'.$addr);
-            $shu['pic'] = $addr; 
-            if($shu['ypic']){
+            $newname = str_replace('\\', '/', $addr);
+          
+            $shu['pic'] = $newname; 
+            if(file_exists($shu['ypic'])){
                 // 获取原图片路径并且删除
                $ypic = 'photo/'.$shu['ypic'];
                 // 获取原图片缩略图进行删除
-                $spic = 'photo/sl_'.$shu['ypic'];
+                $spic = 'photo/'.$shu['ypic'];
                  unlink($spic);
                unlink($ypic); 
                

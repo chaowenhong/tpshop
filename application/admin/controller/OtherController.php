@@ -50,13 +50,24 @@ class OtherController extends Controller
      *
      * @return \think\Response
      */
-    public function findex($id=1)
+    public function findex(Request $request)
     {
-        // echo 2;die;
-        $datt =friend::where('id','=',$id)->select();
-        // dump($datt);
+        // dump($_GET);
+        if(!empty($_GET['id'])){
+            $id = $_GET['id'];
+        }else{
+            $id = '';
+        }
+        // die;
+        if(!empty($id)){
+             $datt =friend::where('id','=',$id)->select();
+         }else{
+             $datt =friend::select();
+         } 
          $data = friend::select();
-        return view('friend/index',['datt'=>$datt,'data'=>$data,'id'=>$id]);
+        //  $a = $request->get();
+        // dump($a);
+        return view('friend/index',['datt'=>$datt,'data'=>$data,'id'=>$id]); 
     }
      /**
      * 添加友情链接
@@ -90,10 +101,10 @@ class OtherController extends Controller
         try{
               friend::create($data,true);
         } catch (\Exception $e) {
-             return $this->error('友情链接添加失败，请检查！');
+             return redirect('友情链接添加失败，请检查！');
         }
         // 添加成功
-        return $this->success('友情链接添加成功，请查看');
+        return redirect('/admin/friend');
     }
     /**
      * 修改
@@ -133,11 +144,11 @@ class OtherController extends Controller
             } catch (Exception $e) {
                return $this->error('修改失败，请检查');
             }
-            return $this->success('修改友情链接成功！');
+             redirect('/admin/friend');
     }
 
     /**
-     * 保存新建的资源
+     * 修改保存配置
      *
      * @param  \think\Request  $request
      * @return \think\Response
@@ -167,8 +178,10 @@ class OtherController extends Controller
             $info = $file['pic']->move('configs');
             // 获取图片的路径
             $addr = $info->getSaveName();
+                // 重新生成图片地址
+            $dat = str_replace('\\', '/', $addr);
             // 保存到数组
-            $data['pic'] = $addr; 
+            $data['pic'] = $dat; 
             $ypic = 'configs/'.$data['ypic'];
             if(file_exists($ypic)){
                 // 获取原图片路径并且删
@@ -187,8 +200,10 @@ class OtherController extends Controller
             $info = $file['wpic']->move('configs/weihu');
             // 获取图片的路径
             $addr = $info->getSaveName();
+           // 重新生成图片地址
+            $dat = str_replace('\\', '/', $addr);
             // 保存到数组
-            $data['wpic'] = $addr; 
+            $data['wpic'] = $dat; 
             $ywpic = 'configs/weihu/'.$data['ywpic'];
             if(file_exists($ywpic)){
                 // 获取原图片路径并且删
@@ -218,7 +233,7 @@ class OtherController extends Controller
             friend::destroy($id);
         } catch (Exception $e) {
             return $this->error('删除失败');
-        }return $this->success('删除成功');
+        } redirect('/admin/friend');
     }
     /**
      * 关闭友情链接
@@ -334,8 +349,10 @@ class OtherController extends Controller
             $in = $file->move('lunpic');
             // 获取地址
             $add = $in->getSaveName();
+             // 重新生成图片地址
+             $dat = str_replace('\\', '/', $add);
             // 进行赋值
-            $data['lpic'] = $add;
+            $data['lpic'] = $dat;
             //删除原图
             $ypic = 'lunpic/'.$data['ypic'];
             if(!empty($ypic)){

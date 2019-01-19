@@ -34,12 +34,13 @@
                         <table class="table-striped table-hover table-bordered" style="width:100%">
                            <thead>
                               <tr align="center" style="height:50px;">
-                                 <td>用户名</td>
-                                 <td>订购单号</td>
+                                 <td>收货人</td>
+                                 <td>联系方式</td>
+                                 <td>收货地址</td>
+                                 <td>订单号码</td>
                                  <td>商品名称</td>
                                  <td>商品数量</td>
                                  <td>订单金额</td>
-                                 <td>收货地址</td>
                                  <td>下单时间</td>
                                  <td>订单状态</td>
                                  <td >编辑操作</td>
@@ -50,11 +51,12 @@
                               <tr  align="center">
 								        
                                  <td>{:$v['name']}</td>
+                                 <td>{:$v['tel']}</td>
+                                 <td>{:$v['address1'].$v['address2'].$v['address3'].$v['address4']}</td>
                                  <td>{:$v['number']}</td>
                                  <td>{:$v['goodsname']}</td>
                                  <td>共 {:$v['goodssum']} 件</td>
                                  <td>共 {:$v['ordnum']} 元</td>
-                                 <td>{:$v['address']}</td>
                                  <td>{:$v['createtime']}</td>
                                  <td>{if $v->state==1}<font style="color:red">未发货</font>{elseif $v->state==2}<font style="color:green">已发货</font>{/if}</td>
                                  <td>

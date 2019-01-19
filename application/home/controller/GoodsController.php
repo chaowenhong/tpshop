@@ -1,7 +1,9 @@
 <?php
 
 namespace app\home\controller;
-
+use app\common\model\Other;
+use app\common\model\Order;
+use app\common\model\friend;
 use think\Controller;
 use think\Request;
 use app\home\model\Goods;
@@ -15,16 +17,28 @@ class GoodsController extends Controller
      */
     public function goods($id='')
     {
+        $jh = $_GET['j'];
         $search = [];
         if(!empty($id)){
-            $selec = Type::where('pid','=',$id)->column('id');
-            // $selec[] = (int)$id;
-            $search[] = ['tid', 'in' ,$selec];
+            if($jh==1){
+                $selec = Type::where('pid','=',$id)->column('id');
+                // $selec[] = (int)$id;
+                $search[] = ['tid', 'in' ,$selec];
+            }
+            if($jh==2){
+                   $search[] = ['tid', '=' ,$id];
+            }
+           
         }
         $good = Goods::where( $search )->select();
         $data = Type::select();
-       // dump($good);die;
-      return view('liebiao/index',['data'=>$data,'good'=>$good]);
+
+       //  // 其他配置
+        $order= Other::find();
+        // 友情链接
+        $lj = friend::select(); 
+      
+      return view('liebiao/index',['data'=>$data,'good'=>$good,'lj'=>$lj,'id'=>$id,'order'=>$order,'order'=>$order]);
       
     } 
 

@@ -8,11 +8,12 @@
 // +----------------------------------------------------------------------
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
+Route::rule('/home/dd','home/LoginController/dd');
 
 //定义前台首页
-Route::rule('/','home/LoginController/index');
+Route::rule('/','home/LoginController/index')->middleware('total')->middleware('total');;
 //定义前台登录页
-Route::rule('/home/login','home/LoginController/login');
+Route::rule('/home/login','home/LoginController/login')->middleware('total');
 // 前台登录名字检测
 Route::rule('/home/login_name','home/LoginController/login_name');
 // 前台登录密码检测
@@ -30,11 +31,11 @@ Route::group([],function(){
 	Route::rule('/home/order_show/:id','home/LoginController/order_show');
 	// 前台用户个人中心修改
 	Route::rule('/home/order_del/:id','home/LoginController/order_del');
-})->middleware('infoHome');
+})->middleware('infoHome')->middleware('total');
 
 
 //定义前台注册页面
-Route::rule('/home/zhuce','home/LoginController/zhuce');
+Route::rule('/home/zhuce','home/LoginController/zhuce')->middleware('total');;
 //定义执行注册页面
 Route::rule('/home/do_zhuce','home/LoginController/do_zhuce');
 //检测用户注册的是否存在
@@ -44,9 +45,9 @@ Route::rule('/home/spwd','home/LoginController/spwd');
 //执行验证码的页面
 Route::rule('/home/yan','home/LoginController/yan');
 //跳转到列表页
-Route::rule('/home/goods/[:id]','home/GoodsController/goods');
+Route::rule('/home/goods/[:id]','home/GoodsController/goods')->middleware('total');;
 //购物车页面
-Route::rule('/home/list/:id','home/GoodsController/list');
+Route::rule('/home/list/:id','home/GoodsController/list')->middleware('total');;
 
 
 // 登录
@@ -153,7 +154,7 @@ Route::group(['name'=>'/admin/','prefix'=>'admin/OtherController/'],function(){
 	// 开启网站
 	Route::rule('config_k/:id','config_k');
 	// 友情链接
-	Route::rule('friend/[:id]','findex');
+	Route::rule('friend','findex');
 	// 添加链接
 	Route::rule('fsave','fsave');
 	// 删除链接

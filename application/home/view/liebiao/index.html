@@ -8,7 +8,7 @@
                     <div class="col-12">
                         <ul class="breadcumb">
                             <li class="roshid-breadcumb"><a class="roshid-breadcumb-link" href="/">首页</a></li>
-                            <li class="roshid-breadcumb"><a class="roshid-breadcumb-link current" href="">Shop</a></li>
+                            <li class="roshid-breadcumb"><a class="roshid-breadcumb-link current" href="">商品列表</a></li>
                         </ul>
                     </div>
                 </div>
@@ -31,13 +31,22 @@
                                         <div class="filter-title">
                                             <h2>商品分类</h2>
                                         </div>
-                                        <ul class="search-filter-list">
-                                            <li class="custom-checkbox">
-                                                <input type="checkbox" name="bookandboardgame" id="cat" class="roshid-checkbox">
-                                                <label for="cat" class="roshid-checkbox-label">Dresses</label>
-                                            </li>                                          
-                                        </ul>
-                                    </div>
+                                     
+                                             <ul class="search-filter-list">
+                                            {foreach $data as $val}
+                                          
+                                               {if $val['pid'] == $id}
+                                                <li>
+                                                     <a href="/home/goods/{$val['id']}?j=2"><font >{$val['name']}</font></a>
+                                                </li>
+                                                 {/if}
+                                       
+                                            {/foreach}
+                                            </ul>
+                                        </li>
+                                       
+                                                                                     
+                                
                                     <!-- Category Search filter End -->
 
                                 </div>
@@ -76,8 +85,8 @@
                                                     <div class="product-box variable-product">
                                                         <div class="roshid-box-image"> 
 
-                                                            <img src="/photo/{$v['pic']}" alt="product image" class="primary_image" >
-                                                            <img src="/photo/{$v['pic']}" alt="product image" class="secondary_image" style="width:200px,height:300px;">
+                                                            <img src="/photo/{$v['pic']}" alt="product image" class="primary_image" width="330px" height="300px">
+                                                            <img src="/photo/{$v['pic']}" alt="product image" class="secondary_image"  width="330px" height="300px">
                                                             <a href="{$v['id']}" data-toggle="modal" data-target="#productModal" class="quick-view"> <i class="fa fa-eye"></i> </a>
                                                         </div>
                                                         <div class="roshid-box-footer">

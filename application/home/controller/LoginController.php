@@ -4,13 +4,15 @@ namespace app\home\controller;
 
 use think\Controller;
 use think\Request;
+use app\tools\Cattree;
+use think\captcha\Captcha;
 use app\home\model\Type;
 use app\home\model\Goods;
-use app\common\model\Order;
-use app\tools\Cattree;
 use app\home\model\User;
-use app\home\model\Config;
-use think\captcha\Captcha;
+use app\common\model\Other;
+use app\home\model\Pic;
+use app\common\model\Order;
+use app\common\model\friend;
 class LoginController extends Controller
 {
 
@@ -26,21 +28,36 @@ class LoginController extends Controller
     }
 
     /**
-     * 显示资源列表
+     * 显示s首页
      *
      * @return \think\Response
      */
     public function index()
     {
+       $order= Other::find();
+        // dump($order);
         $data = Type::select();
-        
-       return view('/default/index',['data'=>$data]);
+        $lun = Pic::select();
+       $lj = friend::select();  
+       return view('/default/index',['data'=>$data,'lun'=>$lun,'lj'=>$lj,'order'=>$order,'order'=>$order]);
     }
+  public function dd()
+    {
+       $order= Other::find();
+        // dump($order);
+        $data = Type::select();
+        $lun = Pic::select();
+       $lj = friend::select();  
+       return view('/dingdan/index',['data'=>$data,'lun'=>$lun,'lj'=>$lj,'order'=>$order,'order'=>$order]);
+    }
+
     //登录方法
      public function login()
     {
-    $data = Type::select();
-       return view('denglu/index',['data'=>$data]);
+       $data = Type::select();
+         $lj = friend::select();
+         $order= Other::find();
+       return view('denglu/index',['data'=>$data,'lj'=>$lj,'order'=>$order]);
     }
      // 
      // 显示注册页面
@@ -49,7 +66,9 @@ class LoginController extends Controller
     public function zhuce()
     {
         $data = Type::select();
-        return view('zhuce/index',['data'=>$data]);
+        $lj = friend::select();
+        $order= Other::find();
+        return view('zhuce/index',['data'=>$data,'lj'=>$lj,'order'=>$order]);
     }
 
       /**
@@ -242,11 +261,13 @@ class LoginController extends Controller
     public function onlyuser()
     {
         $data = Type::select();
+        $lj = friend::select();
+        $order= Other::find();
         $info = session('home_user');
         $id = $info['uid'];
         // dump($info);
         $dat = User::where('uid','=',$id)->find();
-        return view('only/onlyuser',['data'=>$data,'dat'=>$dat]);
+        return view('only/onlyuser',['data'=>$data,'dat'=>$dat,'lj'=>$lj,'order'=>$order]);
     }
      /**
      * 修改资料操作
@@ -289,18 +310,19 @@ class LoginController extends Controller
              
         }
     /**
-     * 显示
+     * 显示个人订单
      *
      * @param  int  $id
      * @return \think\Response
      */
     public function order_show($id)
     {
+        $lj = friend::select();$order= Other::find();
          $data = Type::select();
          $user = session('home_user');
          $dat = Order::where('sid','=',$user['uid'])->select();
          // dump($dat);
-        return view('order/index',['data'=>$data,'dat'=>$dat]);
+        return view('order/index',['data'=>$data,'dat'=>$dat,'lj'=>$lj,'order'=>$order]);
     }
      /**
      * 显示编辑资源表单页.

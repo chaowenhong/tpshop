@@ -18,7 +18,11 @@
                                           <select class="btn-sm" name="status">
                                             <option  value="0">--选择图片位置查询--</option>
                                             <option  value="1">轮播图位置</option>
-                                            <option  value="2">广告图位置</option>
+                                            <option value="2">广告图(左上)</option>
+                                            <option value="3">广告图(左下)</option>
+                                            <option value="4">广告图(中)</option>
+                                            <option value="5">广告图(右上)</option>
+                                            <option value="6">广告图(右下)</option>
                                           </select>
                                           <button class="btn btn-md btn-warning"><i class="fa fa-search" aria-hidden="true"></i>搜索查询 
                                           </button>
@@ -31,7 +35,11 @@
                                        <td><input type="text" name="address" value="" placeholder="地址*不能为空"></td>
                                        <td><select name="status">
                                           <option value="1">轮播图位置</option>
-                                          <option value="2">广告图位置</option>
+                                          <option value="2">广告图(左上)</option>
+                                          <option value="3">广告图(左下)</option>
+                                          <option value="4">广告图(中)</option>
+                                          <option value="5">广告图(右上)</option>
+                                          <option value="6">广告图(右下)</option>
                                        </select></td>
                                        <td><input type="text" name="title1" value="" placeholder="主题"></td>
                                        <td><input type="text" name="title2" value="" placeholder="标题"></td>
@@ -54,11 +62,11 @@
                               <tr  align="center">
                                     <td><img src="/lunpic/{:$v->lpic}" style="width:100px;height:50px" alt=""></td>
                                     <td>{:$v['address']}</td>
-                                    <td>{if $v['status']==1}<font style="color:green">轮播图</font>{elseif $v['status']==2}<font style="color:red">广告图</font>{/if}</td>
+                                    <td>{if $v['status']==1}<font style="color:green">轮播图</font>{elseif $v['status']==2}<font style="color:red">广告图(左上){elseif $v['status']==3}<font style="color:red">广告图(左下)</font>{elseif $v['status']==4}<font style="color:red">广告图(中){elseif $v['status']==5}<font style="color:red">广告图(右上){elseif $v['status']==6}<font style="color:red">广告图(右下){/if}</td>
                                     <td>{:$v['title1']}</td>
                                     <td>{:$v['title2']}</td>
                                     <td>{:$v['title3']}</td>
-                                    <td><a href="/admin/lunupd/{$v['id']}" id="xiugai{$v['id']}"  title="">修改</a>  <a href="/admin/lundel/{$v['id']}" title="">删除</a></td>
+                                    <td><a href="/admin/lunupd/{$v['id']}" id="xiugai{$v['id']}"  title="">修改</a><br><a href="/admin/lundel/{$v['id']}" title="">删除</a></td>
                                     <!-- 点击修改才显示 -->
                              <form action="/admin/dolunupd/{$v['id']}" method="post" enctype="multipart/form-data" accept-charset="utf-8">  
                              <!-- 隐藏域传送原图片 -->
@@ -68,7 +76,11 @@
                                  <td><input type="text" name="address" value="{$v['address']}" placeholder="地址*不能为空"></td>
                                  <td><select name="status">
                                     <option value="1" {if $v['status']==1}selected{/if}>轮播图位置</option>
-                                    <option value="2" {if $v['status']==2}selected{/if}>广告图位置</option>
+                                    <option value="2" {if $v['status']==2}selected{/if}>广告图(左上)</option> 
+                                    <option value="3" {if $v['status']==3}selected{/if}>广告图(左下)</option>
+                                    <option value="4" {if $v['status']==4}selected{/if}>广告图(中)</option>
+                                    <option value="5" {if $v['status']==5}selected{/if}>广告图(右上)</option>
+                                    <option value="6" {if $v['status']==6}selected{/if}>广告图(右下)</option>
                                  </select></td>
                                  <td><input type="text" name="title1" value="{$v['title1']}" placeholder="主题"></td>
                                  <td><input type="text" name="title2" value="{$v['title2']}" placeholder="标题"></td>
