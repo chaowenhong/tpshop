@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="description" content="this is a demo meta description">
     <meta name="keywords" content="this is a demo meta keywords">
-    <title>标题</title>
+    <title>tpshop</title>
 
     <!-- Favicons -->
     <link rel="shortcut icon" href="/home/img/favicon.ico">
@@ -50,10 +50,16 @@
                             <!-- 登录注册 -->
                             <div class="language-currancy roshid-language-currancy d-flex justify-content-md-start justify-content-center">
                                 <div class="language-selector language-currancy-dropdown">
-                                    <div class="dropdown roshid-top-dropdown">
+                                    <div style="{if !empty(session('home_user'))}display:none{/if}" class="dropdown roshid-top-dropdown">
                                       <a href="/home/login" class="roshid-mainmenu-link">   
-                                        <img src="/home/img/language/1.png" alt="English"> 
-                                        登录</a></div>
+                                        <img src="/home/img/language/4.png" alt="English"> 
+                                        登录</a>
+                                    </div>
+
+                                    <div  style="{if empty(session('home_user'))}display:none{/if}" class="dropdown roshid-top-dropdown">
+                                        <a href="/home/onlyuser" title="">{if !empty(session('home_user'))}{:session('home_user')->uname}{/if}</a>
+                                        <a href="/home/userout" title="">退出</a>
+                                    </div>
                                 </div>
                                 <div class="currency-selector language-currancy-dropdown">
                                     <div class="dropdown roshid-top-dropdown">
@@ -108,16 +114,18 @@
                                         <li class="roshid-mainmenu-itm menu-item-has-children">
                                           
                                             <a href="/home/goods/{$v['id']}" class="roshid-mainmenu-link">{$v['name']}</a>
-                                            {foreach $data as $val}
-                                               {if $val['pid'] == $v['id']}
+                                           
                                             <ul class="sub-menu">
+                                             {foreach $data as $val}
+                                               {if $val['pid'] == $v['id']}
                                                 <li>
-                                                    <a href="index.html">{$val['name']}</a>
+                                                    <a href="/home/goods/{$v['id']}">{$val['name']}</a>
                                                 </li>
+                                                 {/if}
+                                            {/foreach}
                                             
                                             </ul>
-                                              {/if}
-                                            {/foreach}
+                                             
                                         </li>
                                           {/if}
                                      {/foreach}
@@ -192,7 +200,7 @@
 
 
                 <!-- 第二张-->
-                <div class="single-slider" style="background-image: url(/home/img/slider/fashion2.jpg);">
+             <!--    <div class="single-slider" style="background-image: url(/home/img/slider/fashion2.jpg);">
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-8 col-md-8">
@@ -204,7 +212,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <!-- Single Slider End -->
                                 
             </div>
@@ -308,14 +316,14 @@
         </section>
         <!-- Policy area End -->
 
-        <!-- 收藏商品-->
+        <!-- 新品-->
         <section class="combine-product-area ptb--80">
 
             <div class="container">
                 <div class="row">
                     <div class="col-12">
                         <div class="section-title text-center mb-50">
-                            <h2>新的收藏 <i class="fa fa-shopping-cart"></i></h2>
+                            <h2>新品<i class="fa fa-shopping-cart"></i></h2>
                         </div>
                     </div>
                 </div>
@@ -323,49 +331,48 @@
                     <div class="col-12">
 
                         <div class="product-tab product-tab--3 content-grey-color">
-                            <!-- 标题目录 -->
-                            <div class="nav nav-pills roshid-product-tab" id="pills-tab" role="tablist">
-                                <a class="nav-link roshid-product-tab-link active" id="apples-tab" data-toggle="pill" href="#apples" role="tab" aria-controls="apples" aria-selected="true">男装</a>
-                                <a class="nav-link roshid-product-tab-link" id="avocodas-tab" data-toggle="pill" href="#avocodas" role="tab" aria-controls="avocodas" aria-selected="false">女人</a>
-                                <a class="nav-link roshid-product-tab-link" id="avocodas-2-tab" data-toggle="pill" href="#avocodas-2" role="tab" aria-controls="avocodas-2" aria-selected="false">孩子</a>
-                            </div>
-                            <!-- Product Tab Head End -->
-
-                            <!-- 商品列表 -->
+                           
                             <div class="tab-content roshid-ptab-content" id="pills-tabContent">
 
                                 <div class="tab-pane roshid-tab-pane show active" id="apples" role="tabpanel" aria-labelledby="apples-tab">
 
                                     <!--整体框架-->
+
                                     <div class="row">
                                         <div class="roshid-tproduct-carousel roshid-tproduct-carousel-area owl-carousel js-tanding-product-1">
                                             <!-- 第一个 -->
+                                             {foreach $good as $v}
+                                            {if $v['status'] == 1}
                                             <div class="col-lg-12 col-sm-12">
                                                 <div class="product-box roshid-deal-area variable-product">
                                                     <div class="roshid-box-image">
-                                                        <img src="/home/img/product/9.jpg" alt="product image" class="primary_image">
-                                                        <img src="/home/img/product/10.jpg" alt="product image" class="secondary_image">
-                                                        <a href="#" data-toggle="modal" data-target="#productModal" class="quick-view"> <i class="fa fa-eye"></i> </a>
+                                                        <img src="/photo/{$v['pic']}" alt="product image" class="primary_image">
+                                                        <img src="/photo/{$v['pic']}" alt="product image" class="secondary_image">
+                                                        <a href="/home/xiangqing/{$v['id']}" data-target="#productModal" class="quick-view"> <i class="fa fa-eye"></i> </a>
                                                     </div>
                                                     <div class="roshid-box-footer">
                                                         <div class="roshid-box-desc">
-                                                            <a href="single-product.html" class="roshid-box-title">Lorem ipsum solets</a>
+                                                            <a href="single-product.html" class="roshid-box-title">{$v['name']}</a>
                                                             <p class="roshid-box-price">
-                                                                <span class="sale-price">&dollar;20.00</span>
-                                                                <span class="regular-price">&dollar;20.50</span>
+                                                                <span class="sale-price">&dollar;{$v['price']}</span>
+                                                                
                                                             </p>
                                                         </div>
                                                         <div class="roshid-box-link">
-                                                            <a href="cart.html" class="btn add-to-cart btn-style-7"><i class="fa fa-heart"></i> </a>
-                                                            <a href="cart.html" class="btn add-to-cart btn-style-7"><i class="fa fa-shopping-cart"></i> </a>
-                                                            <a href="cart.html" class="btn add-to-cart btn-style-7"><i class="fa fa-link"></i> </a>
+                                                            <a href="" class="btn add-to-cart btn-style-7"><i class="fa fa-heart"></i> </a>
+                                                            <a href="/home/car1/{$v['id']}" class="btn add-to-cart btn-style-7"><i class="fa fa-shopping-cart"></i> </a>
+                                                            <a href="" class="btn add-to-cart btn-style-7"><i class="fa fa-link"></i> </a>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
 
-                                        </div>
+
+                                           {/if}
+                                     {/foreach} 
+                                     </div>
                                     </div>
+
                                     <!-- Cameras Product Area End -->
                                 </div>
 
@@ -381,52 +388,81 @@
                 </div>
             </div>
         </section>
-       
+         <!-- 热卖-->
+        <section class="combine-product-area ptb--80">
 
-
-        <!-- 精选商品 -->
-        <section class="featured-product-area pt--80 pb--50">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
                         <div class="section-title text-center mb-50">
-                            <h2>精选服装<i class="fa fa-shopping-cart"></i></h2>
+                            <h2>热卖<i class="fa fa-shopping-cart"></i></h2>
                         </div>
                     </div>
                 </div>
-                 <!--整体框架-->
-                      <div class="row">
-                          <div class="roshid-tproduct-carousel roshid-tproduct-carousel-area owl-carousel js-tanding-product-1">
-                              <!-- 第一个 -->
-                              <div class="col-lg-12 col-sm-12">
-                                  <div class="product-box roshid-deal-area variable-product">
-                                      <div class="roshid-box-image">
-                                          <img src="/home/img/product/9.jpg" alt="product image" class="primary_image">
-                                          <img src="/home/img/product/10.jpg" alt="product image" class="secondary_image">
-                                          <a href="#" data-toggle="modal" data-target="#productModal" class="quick-view"> <i class="fa fa-eye"></i> </a>
-                                      </div>
-                                      <div class="roshid-box-footer">
-                                          <div class="roshid-box-desc">
-                                              <a href="single-product.html" class="roshid-box-title">Lorem ipsum solets</a>
-                                              <p class="roshid-box-price">
-                                                  <span class="sale-price">&dollar;20.00</span>
-                                                  <span class="regular-price">&dollar;20.50</span>
-                                              </p>
-                                          </div>
-                                          <div class="roshid-box-link">
-                                              <a href="cart.html" class="btn add-to-cart btn-style-7"><i class="fa fa-heart"></i> </a>
-                                              <a href="cart.html" class="btn add-to-cart btn-style-7"><i class="fa fa-shopping-cart"></i> </a>
-                                              <a href="cart.html" class="btn add-to-cart btn-style-7"><i class="fa fa-link"></i> </a>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
+                <div class="row">
+                    <div class="col-12">
 
-                          </div>
-                      </div>
+                        <div class="product-tab product-tab--3 content-grey-color">
+                           
+                            <div class="tab-content roshid-ptab-content" id="pills-tabContent">
+
+                                <div class="tab-pane roshid-tab-pane show active" id="apples" role="tabpanel" aria-labelledby="apples-tab">
+
+                                    <!--整体框架-->
+
+                                    <div class="row">
+                                        <div class="roshid-tproduct-carousel roshid-tproduct-carousel-area owl-carousel js-tanding-product-1">
+                                            <!-- 第一个 -->
+                                             {foreach $good as $v}
+                                            {if $v['status'] == 2}
+                                            <div class="col-lg-12 col-sm-12">
+                                                <div class="product-box roshid-deal-area variable-product">
+                                                    <div class="roshid-box-image">
+                                                        <img src="/photo/{$v['pic']}" alt="product image" class="primary_image">
+                                                        <img src="/photo/{$v['pic']}" alt="product image" class="secondary_image">
+                                                        <a href="/home/xiangqing/{$v['id']}" data-target="#productModal" class="quick-view"> <i class="fa fa-eye"></i> </a>
+                                                    </div>
+                                                    <div class="roshid-box-footer">
+                                                        <div class="roshid-box-desc">
+                                                            <a href="single-product.html" class="roshid-box-title">{$v['name']}</a>
+                                                            <p class="roshid-box-price">
+                                                                <span class="sale-price">&dollar;{$v['price']}</span>
+                                                                
+                                                            </p>
+                                                        </div>
+                                                        <div class="roshid-box-link">
+                                                            <a href="" class="btn add-to-cart btn-style-7"><i class="fa fa-heart"></i> </a>
+                                                            <a href="/home/car1/{$v['id']}" class="btn add-to-cart btn-style-7"><i class="fa fa-shopping-cart"></i> </a>
+                                                            <a href="" class="btn add-to-cart btn-style-7"><i class="fa fa-link"></i> </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                           {/if}
+                                     {/foreach} 
+                                     </div>
+                                    </div>
+
+                                    <!-- Cameras Product Area End -->
+                                </div>
+
+                               
+                               
+                            </div>     
+                            <!-- Product Tab Content End -->  
+
+                        </div>
+
+
+                    </div>
+                </div>
             </div>
         </section>
-        <!-- Featured Product area End -->
+        
+
+      
 
         <!-- 时时新闻 -->
         <section class="blog-area pb--80">
@@ -503,85 +539,7 @@
                 </div>
             </div>
         </section>
-        <!-- Blog area End -->
-         <!-- 详情页 -->
-    <div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <!-- 详情页 -->
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-5 col-sm-12">
-                            <div class="tab-content product-thumb-large">
-                                <div id="thumb1" class="tab-pane active show fade">
-                                    <img src="/home/img/product/1.jpg" alt="product thumb">
-                                </div>
-                                <div id="thumb2" class="tab-pane fade">
-                                    <img src="/home/img/product/3.jpg" alt="product thumb">
-                                </div>
-                                <div id="thumb3" class="tab-pane fade">
-                                    <img src="/home/img/product/9.jpg" alt="product thumb">
-                                </div>
-                                
-                            </div>
-                            <div class="product-thumbnail">
-                                <div class="thumb-menu owl-carousel" id="thumbmenu">
-                                    <div class="thumb-menu-item">
-                                        <a href="#thumb1" data-toggle="tab" class="nav-link active">
-                                            <img src="/home/img/product/1.jpg" alt="product thumb">
-                                        </a>
-                                    </div>
-                                    <div class="thumb-menu-item">
-                                        <a href="#thumb2" data-toggle="tab" class="nav-link">
-                                            <img src="/home/img/product/3.jpg" alt="product thumb">
-                                        </a>
-                                    </div>
-                                    <div class="thumb-menu-item">
-                                        <a href="#thumb3" data-toggle="tab" class="nav-link">
-                                            <img src="/home/img/product/9.jpg" alt="product thumb">
-                                        </a>
-                                    </div>
-                                   
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-7 col-sm-12">
-                            <h3 class="product-title">Lorem ipsum solets</h3>
-                            <div class="product-price">
-                                <span class="sale-price">&dollar; 15.00</span>
-                            </div>
-                            <p class="product-desc">详情</p>
-                            <p><b>Availability:</b> In stock</p>
-                            <p><b>Condition:</b> New Product</p>
-                            <div class="product-varients">
-                                <div class="roshid-product-size pb--20">
-                                    <span class="roshid-product-label"><b>Size: </b></span>
-                                    <select class="roshid-product-select">
-                                        <option value="1">S</option>
-                                        <option value="2">M</option>
-                                        <option value="3">L</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="product-action-wrapper pb--20">
-                                <span><b>Quantity: </b></span>
-                                <div class="quantity">
-                                    <input type="number" class="quantity-input" name="qty" id="qty" value="1">
-                                </div>
-                            </div>
-                            <a href="#" class="btn">添加到购物车</a>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
+     
   {/block}
        
         <!-- 底部 -->

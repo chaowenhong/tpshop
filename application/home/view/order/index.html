@@ -1,0 +1,66 @@
+ {extend name="default/index"}
+{block name="content"}
+ <!-- Breadcumb area Start -->
+        <div class="breadcumb-area bg--black ptb--100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <ul class="breadcumb">
+                            <li class="roshid-breadcumb"><a class="roshid-breadcumb-link" href="/home/login">首页</a></li>
+                            <li class="roshid-breadcumb"><a class="roshid-breadcumb-link current" href="">个人订单</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Breadcumb area End -->
+
+        <!-- Main content wrapper start -->
+        <div class="main-content-wrapper">
+            <div class="cart-area ptb--60">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-12">
+                                    <!-- Cart Area Start -->
+                                    <form action="#" class="form form--cart">
+                                        <div class="cart-table table-content table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>订单号码</th>
+                                                        <th>商品名称</th>
+                                                        <th>商品数量</th>
+                                                        <th>价格总计</th>
+                                                        <th>下单时间</th>
+                                                        <th>订单状态</th>
+                                                        <th>订单删除</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                {foreach $dat as $v}
+                                                    <tr>
+                                                        <td>{:$v['number']}</td>
+                                                        <td>{:$v['goodsname']}</td>
+                                                        <td>{:$v['goodssum']}件</td>
+                                                        <td><strong>￥{:$v['ordnum']}</strong></td>
+                                                        <td>{:$v['createtime']}</td>
+                                                        <td>{if $v->state==1}<font style="color:red">未发货</font>{elseif $v->state==2}<font style="color:green">已发货</font>{/if}</td>
+                                                        <td><a href="/home/order_del/{:$v['id']}" title="" style="color:red">删除</a></td>
+                                                    </tr>
+                                                {/foreach}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </form>
+                                    <!-- Cart Area End -->  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>      
+            </div>
+        </div>
+        <!-- Main content wrapper end -->
+{/block}

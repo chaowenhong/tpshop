@@ -1,0 +1,124 @@
+    {extend name="default/index"}
+
+     {block name="content"}
+		
+        <!-- Breadcumb area Start -->
+        <div class="breadcumb-area bg--black ptb--100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <ul class="breadcumb">
+                            <li class="roshid-breadcumb"><a class="roshid-breadcumb-link" href="/">首页</a></li>
+                            <li class="roshid-breadcumb"><a class="roshid-breadcumb-link current" href="/">购物车</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 数量 -->
+ 
+        <!-- Main content wrapper start -->
+        <div class="main-content-wrapper">
+            <div class="cart-area ptb--60">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-12">
+                                    <!-- Cart Area Start -->
+                                    <form action="/home/go_shop" class="form form--cart" method="post">
+                                        <div class="cart-table table-content table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>图片</th>
+                                                        <th>产品</th>
+                                                        <th>单价</th>
+                                                        <th>数量</th>
+                                                        <th>尺码</th>
+
+                                                        <th>总价</th>
+                                                        <th>操作</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                <?php $zong = 0; 
+
+												$all =[];
+                                                ?>
+                                                {foreach $car as $k=>$v}
+													
+													<?php $all[$k]=$v;?>
+                                                    <tr>
+                                                        <td>
+                                                            <a href="single-produpct.html"><img src="/photo/{$v['pic']}" alt="product"></a>
+	                                                     <input type="hidden" name= "pic" value="{$v['pic']}">
+								
+                                                        </td>
+                                                        <td class="cart-product-rice"><h3><a href="#">{$v['name']}</a></h3></td>
+                                                        <td><strong><span class="price">{$v['price']}</span> </strong></td>
+	                                                 <input type="hidden" name= "price" value="{:$v['price']}">
+
+                                                        <td>
+                                                            <div>
+															<a class="btn" href="/home/num/{$v['cid']}?a=jian">-</a>
+															<input type="number" value="{$v['num']}" /> 
+															<input type="hidden" name= "num" value="{:$v['num']}">
+															<a class="btn" href="/home/num/{$v['cid']}?a=jia">+</a>
+
+                                                            </div>
+
+                                                        </td>
+                                                        <td> 
+                                                        
+				                                            <div class="roshid-product-size pb--20">
+				                                               
+				                                                <select class="roshid-product-select" name="size">
+				                                                    <option {if $v['size']==1}selected{/if} value="1">S</option>
+				                                                    <option {if $v['size']==2}selected{/if} value="2">M</option>
+				                                                    <option {if $v['size']==3}selected{/if} value="3">L</option>
+				                                                </select>
+				                                            </div>
+				                                       
+
+                                                        </td>
+                                                        <td><strong>{:$v['price']*$v['num']}￥</strong></td>
+	                                                 <input type="hidden" name= "zong" value="{:$v['price']*$v['num']}">
+
+                                                        <td><a href="/home/car_die/{$v['cid']}"><i class="fa fa-trash remove"></i></a></td>
+                                                    </tr>
+                                                    <?php $zong +=$v['price']*$v['num'];?>
+                                                  {/foreach}
+                                                <tr>
+                                              <!--   <?php dump($all);?>
+                                                <input type="hidden" name= "all" value="<?php dump($all);?> -->
+                                           ">
+	                                                <td>
+	                                                	 <spand class="btn">总价</spand>
+	                                                </td>
+	                                                 <td><strong>{:$zong}￥</strong></td>
+	                                                 <input type="hidden" name= "money" value="{:$zong}">
+	                                                 <!-- <td><a class="btn" href="//clean/">清空购物车</a></td> -->
+	                                                 <td>
+	                                                	 <button class="btn">立即支付</button>
+	                                                </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                            
+                                        </div>
+                                    </form>
+                                   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>      
+            </div>
+        </div>
+   
+
+    
+     {/block}
+
+   

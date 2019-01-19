@@ -1,0 +1,102 @@
+{extend name="default/index"}
+{block name="content"}
+   <section id="main-content">
+		    <!-- BEGIN WRAPPER  -->
+            <section class="wrapper site-min-height">
+               <section class="panel">
+                  <header class="panel-heading">
+                     <span class="label label-primary pull-left"> <i class="fa fa-picture-o" aria-hidden="true"></i>轮播图</span>
+                  </header>
+                  <div class="panel-body">
+                     <div class="adv-table editable-table ">
+                      <div class="space15"></div>
+                        <table class="table-striped table-hover table-bordered" style="width:100%">
+                              <thead>
+                              <tr>
+                                    <td colspan="7" align="center">
+                                       <form  action="/admin/lunpic" method="get">
+                                          <select class="btn-sm" name="status">
+                                            <option  value="0">--选择图片位置查询--</option>
+                                            <option  value="1">轮播图位置</option>
+                                            <option  value="2">广告图位置</option>
+                                          </select>
+                                          <button class="btn btn-md btn-warning"><i class="fa fa-search" aria-hidden="true"></i>搜索查询 
+                                          </button>
+                                       </form>
+                                    </td>
+                              </tr>
+                              <form action="/admin/lunadd" method="post" enctype="multipart/form-data" accept-charset="utf-8">
+                                 <tr  align="center" style="background:#dad9dc;height:20px">
+                                       <td><input type="file" name="lpic" value="" placeholder=""></td>
+                                       <td><input type="text" name="address" value="" placeholder="地址*不能为空"></td>
+                                       <td><select name="status">
+                                          <option value="1">轮播图位置</option>
+                                          <option value="2">广告图位置</option>
+                                       </select></td>
+                                       <td><input type="text" name="title1" value="" placeholder="主题"></td>
+                                       <td><input type="text" name="title2" value="" placeholder="标题"></td>
+                                       <td><input type="text" name="title3" value="" placeholder="内容"></td>
+                                       <td><button class="btn btn-sm btn-primary" >添加  </button></td>
+                                 </tr> 
+                              </form>
+                                 <tr align="center" style="height:50px;background:#000000;color:#ffffff;">
+                                    <td>显示图片</td>
+                                    <td>图片地址</td>
+                                    <td>显示位置</td>
+                                    <td>图片主题</td>
+                                    <td>图片标题</td>
+                                    <td>图片内容</td>
+                                    <td>操作编辑</td>
+                                 </tr>
+                              </thead>
+                            <tbody>
+                            {foreach $data as $v}
+                              <tr  align="center">
+                                    <td><img src="/lunpic/{:$v->lpic}" style="width:100px;height:50px" alt=""></td>
+                                    <td>{:$v['address']}</td>
+                                    <td>{if $v['status']==1}<font style="color:green">轮播图</font>{elseif $v['status']==2}<font style="color:red">广告图</font>{/if}</td>
+                                    <td>{:$v['title1']}</td>
+                                    <td>{:$v['title2']}</td>
+                                    <td>{:$v['title3']}</td>
+                                    <td><a href="/admin/lunupd/{$v['id']}" id="xiugai{$v['id']}"  title="">修改</a>  <a href="/admin/lundel/{$v['id']}" title="">删除</a></td>
+                                    <!-- 点击修改才显示 -->
+                             <form action="/admin/dolunupd/{$v['id']}" method="post" enctype="multipart/form-data" accept-charset="utf-8">  
+                             <!-- 隐藏域传送原图片 -->
+                              <input type="hidden" name="ypic" value="{$v['lpic']}">   
+                                <tr  align="center" class="baocun{$v['id']}" style="display:none;background:#dad9dc;height:20px">
+                                 <td><input type="file" name="lpic" value="" placeholder=""></td>
+                                 <td><input type="text" name="address" value="{$v['address']}" placeholder="地址*不能为空"></td>
+                                 <td><select name="status">
+                                    <option value="1" {if $v['status']==1}selected{/if}>轮播图位置</option>
+                                    <option value="2" {if $v['status']==2}selected{/if}>广告图位置</option>
+                                 </select></td>
+                                 <td><input type="text" name="title1" value="{$v['title1']}" placeholder="主题"></td>
+                                 <td><input type="text" name="title2" value="{$v['title2']}" placeholder="标题"></td>
+                                 <td><input type="text" name="title3" value="{$v['title3']}" placeholder="内容"></td>
+                                 <td><button class="btn btn-sm btn-primary" >保存</button></td>
+                               </tr> 
+                              </tr> 
+                              </form>
+                           {/foreach}
+                           </tbody>
+                         </table>
+                         {:$data->render()}
+                     </div>
+                  </div>
+               </section>
+            </section>
+			<!-- END WRAPPER  -->
+         </section>
+<script src="/admin/js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(e) {
+      $('#xiugai{:$id}').mousedown(function(){
+        $('.baocun{:$id}').show();
+          $('#xiugai{:$id}').hide();
+      });
+      
+         
+   });
+</script>
+{/block}
+

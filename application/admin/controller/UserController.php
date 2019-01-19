@@ -182,7 +182,7 @@ class UserController extends Controller
         $upd = User::find($id);
         // dump($upd);die;
         // 显示修改页面
-        return  view('/user/update',['upd'=>$upd]);
+        return  view('/user/update');
     }
 
     /**

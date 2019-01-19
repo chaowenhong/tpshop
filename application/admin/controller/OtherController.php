@@ -6,6 +6,7 @@ use think\Controller;
 use think\Request;
 use app\common\model\Other;
 use app\common\model\friend;
+use app\common\model\Pic;
 class OtherController extends Controller
 {
     /**
@@ -79,8 +80,10 @@ class OtherController extends Controller
             $info = $file->move('friend');
             // 获取图片的路径
             $addr = $info->getSaveName();
+             // 重新生成图片地址
+            $dat = str_replace('\\', '/', $addr);
             // 设置文件路
-            $data['pic'] = $addr; 
+            $data['pic'] = $dat; 
         }
         // 所有信息完成后进行上传到数据库
         // 判断是否添加成功
@@ -113,14 +116,15 @@ class OtherController extends Controller
             $info = $file['pic']->move('friend');
             // 获取图片的路径
             $addr = $info->getSaveName();
+              // 重新生成图片地址
+            $dat = str_replace('\\', '/', $addr);
             // 设置文件路
-            $data['pic'] = $addr; 
+            $data['pic'] = $dat; 
             if($data['ypic']){
                 // 获取原图片路径并且删除
                $ypic = 'friend/'.$data['ypic'];
                unlink($ypic); 
-               
-            }
+             }
 
         }
 
@@ -223,7 +227,7 @@ class OtherController extends Controller
      */
     public function friendg($id,$sta='2')
     {
-         $state = ['statue'=>$sta];
+        $state = ['statue'=>$sta];
         try {
              friend::update($state,['id'=>$id]);
         } catch (Exception $e){
@@ -242,16 +246,134 @@ class OtherController extends Controller
         return $this->friendg($id,1);
     }
     /**
-     * 显示指定的资源
+     * 显示轮播图页面
      *
      * @param  int  $id
      * @return \think\Response
      */
-    public function read($id)
+    public function lunpic($id='')
     {
-        //
+        $ser = [];
+         if (!empty($_GET['status'])){
+            // 状态搜索
+            $ser[] = ['status','=',"{$_GET['status']}"];
+        }
+        $data =Pic::where($ser)->paginate(20)->appends($_GET);
+        return view('lunbo/lunpic',['data'=>$data,'id'=>$id]);
+    }
+     /**
+         * 添加轮播图
+         *
+         * @param  int  $id
+         * @return \think\Response
+         */
+        public function lunadd(Request $request)
+    {
+        $data = $request->post();
+        $file = $request->file('lpic');
+        // dump($file);die;
+        if(empty($file)){
+            return $this->error('必须添加一张图片');
+        }else{
+            // 移动图片到指定地方
+            $in = $file->move('lunpic');
+            // 获取图片的路
+            $addr = $in->getSaveName();
+            // 重新生成图片地址
+             $dat = str_replace('\\', '/', $addr);
+            // 进行赋值
+            $data['lpic']=$dat; 
+        }
+        if(empty($data['address'])){
+            return $this->error('必须添加一个跳转地址');
+        }
+        
+        try {
+            Pic::create($data,true);
+        } catch (Exception $e) {
+            return $this->error('添加失败');
+        }
+            return $this->success('添加成功了！');
+    }
+     /**
+     * 显示轮播图修改
+     *
+     * @return \think\Response
+     */
+    public function lunupd(Request $request,$id)
+    {
+        $ser = [];
+         if (!empty($_GET['status'])){
+            // 状态搜索
+            $ser[] = ['status','=',"{$_GET['status']}"];
+        }
+        $data =Pic::where($ser)->paginate(20)->appends($_GET);
+
+         return view('lunbo/lunpic',['data'=>$data,'id'=>$id]);
+    }
+       /**
+     * 进行轮播图修改
+     *
+     * @return \think\Response
+     */
+    public function dolunupd(Request $request,$id)
+    {
+        $data = $request->post();
+        $file = $request->file('lpic');
+        // 查看是否没有添加地址
+        if(empty($data['address'])){
+            return $this->error('必须添加一个跳转地址');
+        }
+
+        if(empty($file)){
+            // 没有上传图片
+            $data['lpic'] = $data['ypic'];
+        }else{
+            // 有图片上传
+            // 先进行移动新图
+            $in = $file->move('lunpic');
+            // 获取地址
+            $add = $in->getSaveName();
+            // 进行赋值
+            $data['lpic'] = $add;
+            //删除原图
+            $ypic = 'lunpic/'.$data['ypic'];
+            if(!empty($ypic)){
+                
+                unlink($ypic);
+            }
+        }
+
+         try {
+                Pic::update($data,['id'=>$id]);
+            } catch (Exception $e) {
+               return $this->error('修改失败，请检查');
+            }
+            return $this->success('修改成功！');
+       
     }
 
+    /**
+     * 删除轮播图
+     *
+     * @param  int  $id
+     * @return \think\Response
+     */
+    public function lundel($id)
+    {
+        // 查询该数据
+        $file = Pic::where('id','=',$id)->find();
+        // 查出数据的图片地址
+        $add = 'lunpic/'.$file['lpic'];
+        try {
+            Pic::destroy($id);
+        } catch (Exception $e) {
+            return $this->error('删除失败');
+        }
+        // 在此删除原图
+        unlink($add);
+        return $this->success('删除成功');
+    }
     /**
      * 显示编辑资源表单页.
      *

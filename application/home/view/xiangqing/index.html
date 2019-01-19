@@ -1,0 +1,119 @@
+ {extend name="default/index"}
+{block name="content"}
+		 <!-- Breadcumb area Start -->
+        <div class="breadcumb-area bg--black ptb--100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <ul class="breadcumb">
+                            <li class="roshid-breadcumb"><a class="roshid-breadcumb-link" href="/">首页</a></li>
+                            <li class="roshid-breadcumb"><a class="roshid-breadcumb-link current" href="">详情</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Breadcumb area End -->
+
+        <!-- Main Content Wrapper Start -->
+        <div class="main-content-wrapper">
+            <div class="single-products-area section-padding">
+                <!-- Single Product Start -->
+                <section class="single-product pb--40">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <!-- Tab Content Start -->
+                                <div class="tab-content product-thumb-large" id="myTabContent-3">
+
+                                    <div class="tab-pane fade show active" id="product-large-one">
+                                        <div class="single-product-img">
+                                            <img src="/photo/{:$good['pic']}" alt="product">
+                                            <a href="/photo/{:$good['pic']}" class="popup-img-sproduct popup-link">
+                                            
+                                                <i class="fa fa-search-plus"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                   
+                                   
+                                </div>
+                                <!-- Tab Content End -->
+                                  <form action="/home/car" method="post">
+                                <!-- Product Thumbnail Carousel Start -->
+                                <div class="product-thumbnail">
+                                    <div class="thumb-menu owl-carousel" id="thumbmenu2">
+
+                                        <div class="thumb-menu-item">
+                                            <a href="#product-large-one" data-toggle="tab" class="nav-link active">
+                                                <img src="/photo/{:$good['pic']}" alt="product thumb">
+                                                <input type="hidden" name="pic" value="{:$good['pic']}">
+                                            </a>
+                                        </div>
+
+                                        
+
+
+                                    </div>
+                                </div>
+                                <!-- Product Thumbnail Carousel End -->
+                            </div>
+                            <div class="col-lg-7">
+                                <!-- Single Product Content Start -->
+                                <div class="single-product-content"> 
+                                        <h3 class="product-title">{:$good['name']}</h3>
+                                        <input type="hidden" name="name" value="{:$good['name']}">
+
+                                        <div class="product-price">
+                                            <span class="sale-price">&dollar; {:$good['price']}</span>
+                                            <input type="hidden" name="price" value="{:$good['price']}">
+
+                                        </div>
+                                        <p class="product-desc">{:$good['content']}</p>
+                                          
+
+                                        <p><b>库存:</b> {:$good['num']}</p>
+                                        <p><b>状态:</b> {if $good['status']==1}<font style="color:red"><i class="fa fa-heart fa-spin" ></i>  热卖中！</font>{elseif $good['status']==2}<font style="color:green"><i class="fa fa-certificate fa-spin" ></i>  在售</font>{elseif $good['status']==3}<font style="color:#7d72b9">缺货</font>{/if}</p>
+                                        <div class="product-varients">
+                                            <div class="roshid-product-size pb--20">
+                                                <span class="roshid-product-label"><b>尺寸: </b></span>
+                                                <select class="roshid-product-select" name="size">
+                                                    <option value="1">S</option>
+                                                    <option value="2">M</option>
+                                                    <option value="3">L</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="product-action-wrapper pb--20">
+                                            <span class="roshid-product-label"><b>数量: </b></span>
+                                            <div class="quantity">
+                                                <input type="number" class="quantity-input" name="num" value="1">
+                                            </div>
+                                        </div>
+                                       
+                                        <button class="btn">添加到购物车</button>
+                                    <div class="social-share pt--20">
+                                        <span>分享:</span>
+                                        <ul class="social ml--30">
+                                            <li class="social-item"><a href="facebook.com" class="roshid-social-link"><i class="fa fa-facebook social-icon-modal"></i></a></li>
+                                            <li class="social-item"><a href="twitter.com" class="roshid-social-link"><i class="fa fa-twitter social-icon-modal"></i></a></li>
+                                            <li class="social-item"><a href="plus.google.com" class="roshid-social-link"><i class="fa fa-google-plus social-icon-modal"></i></a></li>
+                                            <li class="social-item"><a href="pinterest.com" class="roshid-social-link"><i class="fa fa-pinterest social-icon-modal"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                              </form>
+                                <!-- Single Product Content End -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Single Product End -->
+
+
+            </div>
+        </div>
+        <!-- Main Content Wrapper End -->
+
+{/block}

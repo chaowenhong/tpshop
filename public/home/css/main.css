@@ -117,7 +117,7 @@ INDEX:
 
 .order-details {
   padding: 2rem;
-  border: 1px solid #ddd;
+ 
   border-radius: 10px;
 }
 
@@ -125,6 +125,8 @@ INDEX:
   border: 1px solid #ededed;
   padding: 2rem;
   border-radius: 10px;
+  width:460px;
+  height:190px;
 }
 
 .roshid-payment-info {

@@ -13,20 +13,58 @@
 Route::rule('/','home/LoginController/index');
 //定义前台登录页
 Route::rule('/home/login','home/LoginController/login');
+// 前台登录名字检测
+Route::rule('/home/login_name','home/LoginController/login_name');
+// 前台登录密码检测
+Route::rule('/home/login_pwd','home/LoginController/login_pwd');
+// 前台登录再次检测并且登录
+Route::rule('/home/dologin','home/LoginController/dologin');
+// 前台用户退出
+Route::rule('/home/userout','home/LoginController/userout');
+Route::group([],function(){
+	// 前台用户个人中心
+	Route::rule('/home/onlyuser','home/LoginController/onlyuser');
+	// 前台用户个人中心修改
+	Route::rule('/home/user_upd/:id','home/LoginController/user_upd');	
+	// 前台用户订单
+	Route::rule('/home/order_show/:id','home/LoginController/order_show');
+	// 前台用户个人中心修改
+	Route::rule('/home/order_del/:id','home/LoginController/order_del');
+})->middleware('infoHome');
+
+
 //定义前台注册页面
 Route::rule('/home/zhuce','home/LoginController/zhuce');
 //定义执行注册页面
 Route::rule('/home/do_zhuce','home/LoginController/do_zhuce');
 //检测用户注册的是否存在
-Route::rule('/home/search_user','home/LoginController/search_user');
-//定义执行前台登录
-Route::rule('/home/do_denglu','home/LoginController/do_denglu');
+Route::rule('/home/sname','home/LoginController/sname');
+//检测用户密码是否为空
+Route::rule('/home/spwd','home/LoginController/spwd');
 //执行验证码的页面
-Route::rule('/home/search_yzm','home/LoginController/search_yzm');
+Route::rule('/home/yan','home/LoginController/yan');
 //跳转到列表页
 Route::rule('/home/goods/[:id]','home/GoodsController/goods');
 //购物车页面
 Route::rule('/home/list/:id','home/GoodsController/list');
+//跳转到详情页
+Route::rule('/home/xiangqing/:id','home/GoodsController/xiangqing');
+//执行添加购物车页
+Route::rule('/home/car','home/GoodsController/car');
+//执行添加购物车页
+Route::rule('/home/car1/:id','home/GoodsController/car1');
+//添加购物车显示页
+Route::rule('/home/car_show','home/GoodsController/car_show');
+//购物车数量加
+Route::rule('/home/num/:cid','home/GoodsController/num');
+
+//删除购物车商品
+Route::rule('/home/car_die/:cid','home/GoodsController/car_die');
+//生成订单页
+Route::rule('/home/go_shop','home/GoodsController/go_shop');
+//完成订单
+Route::rule('/home/wan','home/GoodsController/wan');
+
 
 // 登录
 Route::rule('/admin/login_show','admin/LoginController/index');
@@ -40,12 +78,12 @@ Route::rule('/admin/dologin','admin/LoginController/dologin');
 Route::rule('/admin/verify','admin/LoginController/verify');
 // 登陆组
 Route::group([],function(){
+	
 	// 后台首页
 	Route::rule('/admin/admin_index','admin/AdminController/index');
 
 	// 退出登录
 	Route::rule('/admin/login_outs','admin/LoginController/out');
-
 	// 用户显示列表
 	Route::get('/admin/user_show','admin/UserController/index');
 	// 禁用用户显示列表
@@ -143,4 +181,16 @@ Route::group(['name'=>'/admin/','prefix'=>'admin/OtherController/'],function(){
 	Route::get('friend_k/:id','friend_k');
 	// 修改友情链接
 	Route::rule('f_create/:id','f_create');
+	// 轮播图显示
+	Route::rule('lunpic/[:id]','lunpic');
+	// 轮播图添加
+	Route::rule('lunadd','lunadd');
+	// 轮播图修改
+	Route::rule('lunupd/:id','lunupd');
+	// 轮播图修改
+	Route::rule('dolunupd/:id','dolunupd');
+	// 轮播图修改
+	Route::rule('lundel/:id','lundel');
+	// 广告显示
+	Route::rule('gunangpic','gunangpic');
 })->middleware('InfoAdmin');

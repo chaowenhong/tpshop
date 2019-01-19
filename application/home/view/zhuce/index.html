@@ -26,38 +26,146 @@
                         <div class="col-lg-6 col-md-10">
                             <div class="form-box">
                                 <h1 class="text-center">注册</h1>
-                                <p class="text-center">随便填填就可以了</p>
+                                <p class="text-center">请按要求填写   </p>
                                 <form action="/home/do_zhuce"  method="post">
                                     <div id="error" style="color: red"></div>
                                     <div class="roshid-form-group row align-items-center">
                                         <div class="col-md-12 col-lg-12 col-12">
-                                            <input type="text" name="user" id="user" class="roshid-input-form" placeholder="用户名">
+                                           <i class="fa fa-times dc" style="display:none;color:red" aria-hidden="true"> 该用户名存在,请重新输入*</i>
+                                            <i class="fa fa-exclamation dc" style="display:none;color:orange" aria-hidden="true"> 用户名不能为空*</i>
+                                            <i class="fa fa-check dc" style="display:none;color:green" aria-hidden="true"> 用户名输入正确</i>
+                                            <input type="text" name="uname" id="uname" class="roshid-input-form" placeholder="账       号     建议使用英文" autocomplete="off">
                                         </div>
-                                    </div>
+                                    </div>  
                                    <div class="roshid-form-group row align-items-center">
                                         <div class="col-md-12 col-lg-12 col-12">
-                                            <input type="password" name="pwd" id="pwd" class="roshid-input-form" placeholder="密码">
+                                         <i class="fa fa-exclamation dc" style="display:none;color:orange" aria-hidden="true"> 密码不能为空*</i>
+                                          <i class="fa fa-exclamation dc" style="display:none;color:red" aria-hidden="true"> 密码长度过短,至少六位*</i>
+                                             <i class="fa fa-check dc" style="display:none;color:green" aria-hidden="true"> 密码输入正确</i>
+                                           
+                                            <input type="password" name="pwd" id="pwd" class="roshid-input-form" placeholder="密       码     长度不得低于六位">
                                         </div>
                                     </div>
                                      <div class="roshid-form-group row align-items-center">
                                         <div class="col-md-12 col-lg-12 col-12">
-                                            <input type="password" name="repwd" id="repwd" class="roshid-input-form" placeholder="确认密码">
+                                            <input type="password" name="repwd" id="repwd" class="roshid-input-form" placeholder="确认密码    再次输入密码">
+                                        </div>
+                                    </div>
+                                    <div class="roshid-form-group row align-items-center">
+                                        <div class="col-md-12 col-lg-12 col-12">
+                                            <input type="text" name="yanzhen" id="yanzhen" class="roshid-input-form" placeholder="验 证 码     ↓看不清?请点击更换" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="roshid-form-group row align-items-center">
+                                       <div class="col-md-12 col-lg-12 col-12 pull-center">
+                                        <img src="{:url('/home/yan')}" alt="captcha" onclick="this.src='/home/yan?'+Math.random()" />
                                         </div>
                                     </div>
                                     <div class="roshid-form-group row align-items-center">
                                         <div class="col-lg-12 col-12 text-center">
-                                          
-                                            <button type="submit" id="tijiao"
-                                            class="btn btn--large btn-style-3">提交</button>
+                                            <input type="submit" id="zhuce" class="btn btn--large btn-style-3" value="提交">
                                         </div>
                                     </div>
                                 </form>
-                                <a class="create-account-link" href="/home/login">已注册?进行登录</a>
+                                <a class="create-account-link" href="/home/login">已有账号?进行登录</a>
                             </div>
                         </div>
                     </div>   
                 </div>   
             </div>
+    <script src="/admin/login/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript">
+        // 名称查询
+          $("#uname").blur(function(){
+              // 获取焦点
+               $("#uname").focus(function(){
+                    $("#uname").attr('placeholder','');
+               });
+                // 获取焦点
+               $("#pwd").focus(function(){
+                    $("#pwd").attr('placeholder','');
+               });
+              // 设置一个失去焦点的操作
+             $(function(){  
+                $.ajax({        
+                    type : 'post',       
+                    url : '/home/sname',        
+                    dataType : 'json',       
+                    data : {  'uname' : $('#uname').val() },//这里的data是一个对象       
+                    success : function(data){  
+                         // console.log(data);
+                        let ob =  JSON.parse(data); 
+                    if(ob.status == 100){
+                            // 值为空
+                            $(".dc:eq(1)").show();
+                            $(".dc:eq(0)").hide();
+                            $(".dc:eq(2)").hide();
+                            $("#zhuce").attr("disabled",true);
+                             $("#uname").css('border-color','red');
+                        }
+                        if(ob.status == 200){
+                            // 账号已经存在
+                            $(".dc:eq(0)").show();
+                            $(".dc:eq(1)").hide();
+                            $(".dc:eq(2)").hide();
+                            $("#zhuce").attr("disabled",true);
+                             $("#uname").css('border-color','red');
+                        }
+                        if(ob.status == 400){
+                             // 正确
+                            $(".dc:eq(0)").hide();
+                            $(".dc:eq(1)").hide();
+                            $(".dc:eq(2)").show();
+                            $("#zhuce").attr("disabled",false);
+                             $("#uname").css('border-color','');
+                        }
+                    }, 
+                });
+              });
+            });
+             // 密码查询
+          $("#pwd").blur(function(){
+              // 设置一个失去焦点的操作
+             $(function(){  
+                $.ajax({        
+                    type : 'post',       
+                    url : '/home/spwd',        
+                    dataType : 'json',       
+                    data : {  'pwd' : $('#pwd').val() },//这里的data是一个对象       
+                    success : function(data){  
+                         // console.log(data);
+                        let ob =  JSON.parse(data); 
+                        if(ob.status == 100){
+                            // 值为空
+                            $(".dc:eq(3)").show();
+                            $(".dc:eq(4)").hide();
+                            $(".dc:eq(5)").hide();
+                            $("#zhuce").attr("disabled",true);
+                            $("#pwd").css('border-color','red');
+                        }
+                        if(ob.status == 200){
+                            // 账号已经存在
+                            $(".dc:eq(4)").show();
+                            $(".dc:eq(3)").hide();
+                            $(".dc:eq(5)").hide();
+                            $("#zhuce").attr("disabled",true);
+                             $("#pwd").css('border-color','red');
+                        }
+                        if(ob.status == 400){
+                             // 正确
+                            $(".dc:eq(5)").show();
+                            $(".dc:eq(3)").hide();
+                            $(".dc:eq(4)").hide();
+                             $("#zhuce").attr("disabled",false);
+                              $("#pwd").css('border-color','');
+                        }
+                       
+                    }, 
+                });
+              });
+            });
+          
+    </script>
   </div>
  {/block}
    
